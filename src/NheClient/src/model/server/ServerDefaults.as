@@ -88,8 +88,8 @@ package model.server
 		/**
 		 * If the owner set the profile of the user
 		 */
-		public static const REQUEST_PROJECT_USER_PROFILE_SET:Number = 14;
-		public static const RESPONSE_PROJECT_USER_PROFILE_SET:Number = 14;
+		public static const REQUEST_PROJECT_USER_ROLE_SET:Number = 14;
+		public static const RESPONSE_PROJECT_USER_ROLE_SET:Number = 14;
 		
 		/**
 		 * Connect the user
