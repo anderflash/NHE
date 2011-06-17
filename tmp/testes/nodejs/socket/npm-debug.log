@@ -1,0 +1,523 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'rsa' ]
+info using npm@1.0.6
+info using node@v0.4.7
+verbose config file /home/MICROSOFT/.npmrc
+verbose config file /usr/local/etc/npmrc
+silly testEngine { name: 'cipherpipe',
+silly testEngine   description: 'Thin wrapper around openssl for encryption/decryption',
+silly testEngine   keywords: [ 'cryptography', 'openssl' ],
+silly testEngine   author: { name: 'Trevor Burnham' },
+silly testEngine   version: '0.1.1',
+silly testEngine   licenses: [ { type: 'MIT' } ],
+silly testEngine   engines: { node: '>=0.2.0' },
+silly testEngine   directories: { lib: './lib' },
+silly testEngine   main: './lib/cipherpipe',
+silly testEngine   dependencies: { underscore: '>= 1.1.4' },
+silly testEngine   devDependencies: {},
+silly testEngine   _id: 'cipherpipe@0.1.1',
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.6',
+silly testEngine   _nodeVersion: 'v0.4.7',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/MICROSOFT/node_modules/cipherpipe/package.json
+verbose loadDefaults cipherpipe@0.1.1
+silly testEngine { name: 'facebook-js',
+silly testEngine   description: 'Minimalistic facebook API client',
+silly testEngine   version: '1.0.0',
+silly testEngine   author: { name: 'Pau Ramon', email: 'masylum@gmail.com' },
+silly testEngine   keywords: [ 'facebook' ],
+silly testEngine   main: 'lib/facebook_client.js',
+silly testEngine   directories: { lib: './lib' },
+silly testEngine   dependencies: { oauth: '>= 0.8.2', request: '1.9.5' },
+silly testEngine   devDependencies: { testosterone: '1.2.0' },
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/masylum/facebook-js.git' },
+silly testEngine   engines: { node: '>= 0.4.0' },
+silly testEngine   _id: 'facebook-js@1.0.0',
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.6',
+silly testEngine   _nodeVersion: 'v0.4.7',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/MICROSOFT/node_modules/facebook-js/package.json
+verbose loadDefaults facebook-js@1.0.0
+silly testEngine { name: 'linkedin-js',
+silly testEngine   description: 'Minimalistic linkedin API client',
+silly testEngine   version: '0.1.1',
+silly testEngine   author: { name: 'Pau Ramon', email: 'masylum@gmail.com' },
+silly testEngine   keywords: [ 'linkedin' ],
+silly testEngine   dependencies: { oauth: '0.9.0' },
+silly testEngine   devDependencies: { testosterone: '1.2.0', gently: '0.9.1' },
+silly testEngine   main: 'lib/linkedin_client.js',
+silly testEngine   directories: { lib: './lib' },
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/masylum/linkedin-js.git' },
+silly testEngine   engines: { node: '>= 0.2.0' },
+silly testEngine   _id: 'linkedin-js@0.1.1',
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.6',
+silly testEngine   _nodeVersion: 'v0.4.7',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/MICROSOFT/node_modules/linkedin-js/package.json
+verbose loadDefaults linkedin-js@0.1.1
+silly testEngine { name: 'mysql',
+silly testEngine   version: '0.9.1',
+silly testEngine   devDependencies: { gently: '>=0.8.0' },
+silly testEngine   main: './lib/mysql',
+silly testEngine   scripts: { test: 'make test' },
+silly testEngine   dependencies: {},
+silly testEngine   _id: 'mysql@0.9.1',
+silly testEngine   engines: { node: '*' },
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.6',
+silly testEngine   _nodeVersion: 'v0.4.7',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/MICROSOFT/node_modules/mysql/package.json
+verbose loadDefaults mysql@0.9.1
+silly testEngine { name: 'mysql-client',
+silly testEngine   description: 'A full-featured mysql client for node',
+silly testEngine   version: '0.3.0',
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/Sebmaster/mysqlcl.git' },
+silly testEngine   author: { name: 'Sebastian Mayr' },
+silly testEngine   main: './lib/Connection.js',
+silly testEngine   directories: { lib: './lib' },
+silly testEngine   engines: { node: '>=0.3.1' },
+silly testEngine   dependencies: {},
+silly testEngine   devDependencies: {},
+silly testEngine   _id: 'mysql-client@0.3.0',
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.6',
+silly testEngine   _nodeVersion: 'v0.4.7',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/MICROSOFT/node_modules/mysql-client/package.json
+verbose loadDefaults mysql-client@0.3.0
+silly testEngine { name: 'orm',
+silly testEngine   version: '0.1.3',
+silly testEngine   description: 'NodeJS Object-relational mapping',
+silly testEngine   keywords: [ 'orm', 'mysql', 'database', 'relational' ],
+silly testEngine   author: 
+silly testEngine    { name: 'Diogo Resende',
+silly testEngine      email: 'dresende@thinkdigital.pt',
+silly testEngine      url: 'http://www.thinkdigital.pt' },
+silly testEngine   engines: { node: '>= 0.4.0' },
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/dresende/node-orm.git' },
+silly testEngine   directories: { lib: './lib', example: './examples' },
+silly testEngine   main: './lib/orm',
+silly testEngine   licenses: 
+silly testEngine    [ { type: 'MIT',
+silly testEngine        url: 'http://github.com/dresende/node-orm/raw/master/LICENSE' } ],
+silly testEngine   dependencies: {},
+silly testEngine   devDependencies: {},
+silly testEngine   _id: 'orm@0.1.3',
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.6',
+silly testEngine   _nodeVersion: 'v0.4.7',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/MICROSOFT/node_modules/orm/package.json
+verbose loadDefaults orm@0.1.3
+silly testEngine { name: 'socket.io',
+silly testEngine   description: 'The cross-browser WebSocket',
+silly testEngine   version: '0.6.17',
+silly testEngine   author: 
+silly testEngine    { name: 'Guillermo Rauch',
+silly testEngine      email: 'guillermo@learnboost.com' },
+silly testEngine   contributors: 
+silly testEngine    [ { name: 'Guillermo Rauch', email: 'rauchg@gmail.com' },
+silly testEngine      { name: 'Arnout Kazemier',
+silly testEngine        email: 'info@3rd-eden.com' } ],
+silly testEngine   licenses: 
+silly testEngine    [ { type: 'MIT',
+silly testEngine        url: 'http://github.com/learnboost/Socket.IO-node/raw/master/README.md' } ],
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/learnboost/Socket.IO-node.git' },
+silly testEngine   engine: [ 'node >=0.1.102' ],
+silly testEngine   main: './index',
+silly testEngine   scripts: { test: 'make test' },
+silly testEngine   dependencies: {},
+silly testEngine   devDependencies: {},
+silly testEngine   _id: 'socket.io@0.6.17',
+silly testEngine   engines: { node: '*' },
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.6',
+silly testEngine   _nodeVersion: 'v0.4.7',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/MICROSOFT/node_modules/socket.io/package.json
+verbose loadDefaults socket.io@0.6.17
+silly testEngine { name: 'twitter-js',
+silly testEngine   description: 'easy peasy twitter client',
+silly testEngine   version: '0.1.0',
+silly testEngine   author: { name: 'Pau Ramon', email: 'masylum@gmail.com' },
+silly testEngine   keywords: [ 'twitter' ],
+silly testEngine   main: 'lib/twitter_client.js',
+silly testEngine   directories: { lib: './lib' },
+silly testEngine   dependencies: { oauth: '0.9.0' },
+silly testEngine   devDependencies: { testosterone: '1.2.0', gently: '0.9.1' },
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/masylum/twitter-js.git' },
+silly testEngine   engines: { node: '>=0.2.0 <0.5.0' },
+silly testEngine   _id: 'twitter-js@0.1.0',
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.6',
+silly testEngine   _nodeVersion: 'v0.4.7',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/MICROSOFT/node_modules/twitter-js/package.json
+verbose loadDefaults twitter-js@0.1.0
+verbose has wscript [ undefined,
+verbose has wscript   { file: '/home/MICROSOFT/node_modules/des/package.json',
+verbose has wscript     serverjs: false,
+verbose has wscript     contributors: false,
+verbose has wscript     wscript: true } ]
+silly testEngine { name: 'des',
+silly testEngine   version: '2.0.1',
+silly testEngine   main: 'des',
+silly testEngine   description: 'A C++ module that does DES encryption.',
+silly testEngine   maintainers: 
+silly testEngine    [ { name: 'Peteris Krumins',
+silly testEngine        email: 'peteris.krumins@gmail.com',
+silly testEngine        url: 'http://www.catonmat.net' } ],
+silly testEngine   licenses: [ { type: 'GPL' } ],
+silly testEngine   repositories: 
+silly testEngine    [ { type: 'git',
+silly testEngine        url: 'http://github.com/pkrumins/node-des.git' } ],
+silly testEngine   engine: [ 'node>=0.3.0' ],
+silly testEngine   scripts: { install: 'node-waf configure build' },
+silly testEngine   dependencies: {},
+silly testEngine   devDependencies: {},
+silly testEngine   _id: 'des@2.0.1',
+silly testEngine   engines: { node: '*' },
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.6',
+silly testEngine   _nodeVersion: 'v0.4.7',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/MICROSOFT/node_modules/des/package.json
+verbose loadDefaults des@2.0.1
+verbose into /home/MICROSOFT [ 'rsa' ]
+verbose cache add [ 'rsa', null ]
+info addNamed [ 'rsa', '' ]
+verbose addNamed [ null, '' ]
+verbose GET rsa
+verbose raw, before any munging rsa
+verbose url resolving [ 'http://registry.npmjs.org/', './rsa' ]
+verbose url resolved http://registry.npmjs.org/rsa
+verbose url parsed { protocol: 'http:',
+verbose url parsed   slashes: true,
+verbose url parsed   host: 'registry.npmjs.org',
+verbose url parsed   hostname: 'registry.npmjs.org',
+verbose url parsed   href: 'http://registry.npmjs.org/rsa',
+verbose url parsed   pathname: '/rsa' }
+verbose etag "AZ7U0ISSYS1O1VUUCTZCYRZPZ"
+verbose response http://registry.npmjs.org/rsa
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.1.0 (Erlang OTP/R14B)',
+silly get cb     etag: '"AZ7U0ISSYS1O1VUUCTZCYRZPZ"',
+silly get cb     date: 'Wed, 15 Jun 2011 21:13:52 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag rsa from cache
+verbose GET rsa/0.0.1
+verbose raw, before any munging rsa/0.0.1
+verbose url resolving [ 'http://registry.npmjs.org/', './rsa/0.0.1' ]
+verbose url resolved http://registry.npmjs.org/rsa/0.0.1
+verbose url parsed { protocol: 'http:',
+verbose url parsed   slashes: true,
+verbose url parsed   host: 'registry.npmjs.org',
+verbose url parsed   hostname: 'registry.npmjs.org',
+verbose url parsed   href: 'http://registry.npmjs.org/rsa/0.0.1',
+verbose url parsed   pathname: '/rsa/0.0.1' }
+verbose etag "AZ7U0ISSYS1O1VUUCTZCYRZPZ"
+verbose response http://registry.npmjs.org/rsa/0.0.1
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.1.0 (Erlang OTP/R14B)',
+silly get cb     etag: '"AZ7U0ISSYS1O1VUUCTZCYRZPZ"',
+silly get cb     date: 'Wed, 15 Jun 2011 21:13:53 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag rsa/0.0.1 from cache
+verbose bin dist [ '0.4-ares1.7.4-ev4.4-openssl0.9.8r-v83.1.8.10-cygwin-1.7.9(0.237/5/3)',
+verbose bin dist   { shasum: '3ece497d2ac21db291eb3c7eef371523124dee0f',
+verbose bin dist     tarball: 'http://registry.npmjs.org/rsa/-/rsa-0.0.1.tgz',
+verbose bin dist     bin: 
+verbose bin dist      { '0.4-sunos-5.11': 
+verbose bin dist         { shasum: 'c5b4edec05d9f43d0a36c94d9db57977752e79c1',
+verbose bin dist           tarball: 'http://registry.npmjs.org/rsa/-/rsa-0.0.1-0.4-sunos-5.11.tgz' } } } ]
+verbose addRemoteTarball [ 'http://registry.npmjs.org/rsa/-/rsa-0.0.1.tgz',
+verbose addRemoteTarball   '3ece497d2ac21db291eb3c7eef371523124dee0f' ]
+verbose mkdir done: /tmp/npm-1308172416887/1308172416887-0.44719332084059715 755
+info fetch http://registry.npmjs.org/rsa/-/rsa-0.0.1.tgz
+verbose fetch to /tmp/npm-1308172416887/1308172416887-0.44719332084059715/tmp.tgz
+silly updated sha bytes 7058
+info shasum 3ece497d2ac21db291eb3c7eef371523124dee0f
+info shasum /tmp/npm-1308172416887/1308172416887-0.44719332084059715/tmp.tgz
+verbose mkdir done: /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/package
+silly gunzTarPerm modes [ '755', '644' ]
+verbose success gzip "--decompress" "--stdout" "/tmp/npm-1308172416887/1308172416887-0.44719332084059715/tmp.tgz"
+verbose success tar "-mvxpf" "-" "--no-same-owner" "-C" "/tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm"
+silly asyncMap in gTP /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm/package/
+silly asyncMap in gTP /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm/package/LICENCE
+silly asyncMap in gTP /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm/package/.gitignore
+silly asyncMap in gTP /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm/package/node_rsa.h
+silly asyncMap in gTP /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm/package/node_rsa.cc
+silly asyncMap in gTP /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm/package/package.json
+silly asyncMap in gTP /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm/package/rsa.private
+silly asyncMap in gTP /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm/package/README.md
+silly asyncMap in gTP /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm/package/rsa.public
+silly asyncMap in gTP /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm/package/rsa.js
+silly asyncMap in gTP /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm/package/wscript
+silly asyncMap in gTP /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm/package/rsaBinding.node
+silly asyncMap in gTP /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm/package/node_modules/
+silly asyncMap in gTP /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm/package/test/
+silly asyncMap in gTP /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm/package/test/test.js
+verbose gunzed /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm/package
+verbose rm'ed /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/package
+verbose renamed [ '/tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/___package.npm/package',
+verbose renamed   '/tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/package' ]
+verbose has wscript [ undefined,
+verbose has wscript   { file: '/tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/package/package.json',
+verbose has wscript     serverjs: false,
+verbose has wscript     contributors: false,
+verbose has wscript     wscript: true } ]
+silly testEngine { name: 'rsa',
+silly testEngine   version: '0.0.1',
+silly testEngine   description: 'OpenSSL\'s RSA encrypt/decrypt routines',
+silly testEngine   keywords: [ 'openssl', 'crypto', 'rsa' ],
+silly testEngine   homepage: 'https://github.com/chrisa/node-rsa#readme',
+silly testEngine   author: { name: 'Chris Andrews', email: 'chris@nodnol.org' },
+silly testEngine   main: './rsa.js',
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/chrisa/node-rsa.git' },
+silly testEngine   scripts: { install: 'node-waf configure build' },
+silly testEngine   dependencies: {},
+silly testEngine   devDependencies: {},
+silly testEngine   _id: 'rsa@0.0.1',
+silly testEngine   engines: { node: '*' },
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.6',
+silly testEngine   _nodeVersion: 'v0.4.7',
+silly testEngine   _defaultsLoaded: true,
+silly testEngine   path: '/tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/package' }
+verbose caching /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/package/package.json
+verbose loadDefaults rsa@0.0.1
+verbose tarball contents [ 'package' ]
+verbose from cache /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/package/package.json
+verbose pack /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/package /home/MICROSOFT/.npm/rsa/0.0.1/package.tgz
+verbose from cache /tmp/npm-1308172416887/1308172416887-0.44719332084059715/contents/package/package.json
+verbose mkdir'ed /home/MICROSOFT/.npm/rsa/0.0.1
+verbose tar about to write tar and gzip it.
+silly tar args [ '-cvf',
+silly tar args   '-',
+silly tar args   'package/.gitignore',
+silly tar args   'package/LICENCE',
+silly tar args   'package/node_rsa.cc',
+silly tar args   'package/package.json',
+silly tar args   'package/README.md',
+silly tar args   'package/rsa.js',
+silly tar args   'package/rsa.private',
+silly tar args   'package/rsa.public',
+silly tar args   'package/wscript',
+silly tar args   'package/node_rsa.h',
+silly tar args   'package/test/test.js' ]
+verbose success tar -cvf - <file list elided>
+verbose success gzip "--stdout"
+verbose mkdir done: /home/MICROSOFT/.npm/rsa/0.0.1/___package.npm 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget /home/MICROSOFT/.npm/rsa/0.0.1/package
+silly gunzTarPerm modes [ '755', '644' ]
+verbose success gzip "--decompress" "--stdout" "/home/MICROSOFT/.npm/rsa/0.0.1/package.tgz"
+verbose success tar "-mvxpf" "-" "--no-same-owner" "-C" "/home/MICROSOFT/.npm/rsa/0.0.1/___package.npm"
+silly asyncMap in gTP /home/MICROSOFT/.npm/rsa/0.0.1/___package.npm/package/
+silly asyncMap in gTP /home/MICROSOFT/.npm/rsa/0.0.1/___package.npm/package/LICENCE
+silly asyncMap in gTP /home/MICROSOFT/.npm/rsa/0.0.1/___package.npm/package/.gitignore
+silly asyncMap in gTP /home/MICROSOFT/.npm/rsa/0.0.1/___package.npm/package/node_rsa.h
+silly asyncMap in gTP /home/MICROSOFT/.npm/rsa/0.0.1/___package.npm/package/node_rsa.cc
+silly asyncMap in gTP /home/MICROSOFT/.npm/rsa/0.0.1/___package.npm/package/package.json
+silly asyncMap in gTP /home/MICROSOFT/.npm/rsa/0.0.1/___package.npm/package/README.md
+silly asyncMap in gTP /home/MICROSOFT/.npm/rsa/0.0.1/___package.npm/package/rsa.private
+silly asyncMap in gTP /home/MICROSOFT/.npm/rsa/0.0.1/___package.npm/package/rsa.public
+silly asyncMap in gTP /home/MICROSOFT/.npm/rsa/0.0.1/___package.npm/package/rsa.js
+silly asyncMap in gTP /home/MICROSOFT/.npm/rsa/0.0.1/___package.npm/package/wscript
+silly asyncMap in gTP /home/MICROSOFT/.npm/rsa/0.0.1/___package.npm/package/test/
+silly asyncMap in gTP /home/MICROSOFT/.npm/rsa/0.0.1/___package.npm/package/test/test.js
+verbose gunzed /home/MICROSOFT/.npm/rsa/0.0.1/___package.npm/package
+verbose rm'ed /home/MICROSOFT/.npm/rsa/0.0.1/package
+verbose renamed [ '/home/MICROSOFT/.npm/rsa/0.0.1/___package.npm/package',
+verbose renamed   '/home/MICROSOFT/.npm/rsa/0.0.1/package' ]
+verbose has wscript [ undefined,
+verbose has wscript   { file: '/home/MICROSOFT/.npm/rsa/0.0.1/package/package.json',
+verbose has wscript     serverjs: false,
+verbose has wscript     contributors: false,
+verbose has wscript     wscript: true } ]
+silly testEngine { name: 'rsa',
+silly testEngine   version: '0.0.1',
+silly testEngine   description: 'OpenSSL\'s RSA encrypt/decrypt routines',
+silly testEngine   keywords: [ 'openssl', 'crypto', 'rsa' ],
+silly testEngine   homepage: 'https://github.com/chrisa/node-rsa#readme',
+silly testEngine   author: { name: 'Chris Andrews', email: 'chris@nodnol.org' },
+silly testEngine   main: './rsa.js',
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/chrisa/node-rsa.git' },
+silly testEngine   scripts: { install: 'node-waf configure build' },
+silly testEngine   dependencies: {},
+silly testEngine   devDependencies: {},
+silly testEngine   _id: 'rsa@0.0.1',
+silly testEngine   engines: { node: '*' },
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.6',
+silly testEngine   _nodeVersion: 'v0.4.7',
+silly testEngine   _defaultsLoaded: true,
+silly testEngine   dist: { shasum: '07b187e2c33cd4f808d336e8f68b1f54e5dad9df' } }
+verbose caching /home/MICROSOFT/.npm/rsa/0.0.1/package/package.json
+verbose loadDefaults rsa@0.0.1
+silly updated sha bytes 6932
+info shasum 07b187e2c33cd4f808d336e8f68b1f54e5dad9df
+info shasum /home/MICROSOFT/.npm/rsa/0.0.1/package.tgz
+verbose from cache /home/MICROSOFT/.npm/rsa/0.0.1/package/package.json
+verbose chmod /home/MICROSOFT/.npm/rsa/0.0.1/package.json 644
+verbose chmod /home/MICROSOFT/.npm/rsa/0.0.1/package.tgz 644
+silly resolved [ { name: 'rsa',
+silly resolved     version: '0.0.1',
+silly resolved     description: 'OpenSSL\'s RSA encrypt/decrypt routines',
+silly resolved     keywords: [ 'openssl', 'crypto', 'rsa' ],
+silly resolved     homepage: 'https://github.com/chrisa/node-rsa#readme',
+silly resolved     author: { name: 'Chris Andrews', email: 'chris@nodnol.org' },
+silly resolved     main: './rsa.js',
+silly resolved     repository: 
+silly resolved      { type: 'git',
+silly resolved        url: 'git://github.com/chrisa/node-rsa.git' },
+silly resolved     scripts: { install: 'node-waf configure build' },
+silly resolved     dependencies: {},
+silly resolved     devDependencies: {},
+silly resolved     _id: 'rsa@0.0.1',
+silly resolved     engines: { node: '*' },
+silly resolved     _engineSupported: true,
+silly resolved     _npmVersion: '1.0.6',
+silly resolved     _nodeVersion: 'v0.4.7',
+silly resolved     _defaultsLoaded: true,
+silly resolved     dist: { shasum: '07b187e2c33cd4f808d336e8f68b1f54e5dad9df' } } ]
+info into /home/MICROSOFT rsa@0.0.1
+info installOne rsa@0.0.1
+info unbuild /home/MICROSOFT/node_modules/rsa
+silly testEngine { name: 'rsa',
+silly testEngine   version: '0.0.1',
+silly testEngine   description: 'OpenSSL\'s RSA encrypt/decrypt routines',
+silly testEngine   keywords: [ 'openssl', 'crypto', 'rsa' ],
+silly testEngine   homepage: 'https://github.com/chrisa/node-rsa#readme',
+silly testEngine   author: { name: 'Chris Andrews', email: 'chris@nodnol.org' },
+silly testEngine   main: './rsa.js',
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/chrisa/node-rsa.git' },
+silly testEngine   scripts: { install: 'node-waf configure build' },
+silly testEngine   dependencies: {},
+silly testEngine   devDependencies: {},
+silly testEngine   _id: 'rsa@0.0.1',
+silly testEngine   engines: { node: '*' },
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.6',
+silly testEngine   _nodeVersion: 'v0.4.7',
+silly testEngine   _defaultsLoaded: true,
+silly testEngine   dist: { shasum: '07b187e2c33cd4f808d336e8f68b1f54e5dad9df' } }
+verbose caching /home/MICROSOFT/.npm/rsa/0.0.1/package.json
+verbose mkdir done: /home/MICROSOFT/node_modules/___rsa.npm 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget /home/MICROSOFT/node_modules/rsa
+silly gunzTarPerm modes [ '755', '644' ]
+verbose success gzip "--decompress" "--stdout" "/home/MICROSOFT/.npm/rsa/0.0.1/package.tgz"
+verbose success tar "-mvxpf" "-" "--no-same-owner" "-C" "/home/MICROSOFT/node_modules/___rsa.npm"
+silly asyncMap in gTP /home/MICROSOFT/node_modules/___rsa.npm/package/
+silly asyncMap in gTP /home/MICROSOFT/node_modules/___rsa.npm/package/LICENCE
+silly asyncMap in gTP /home/MICROSOFT/node_modules/___rsa.npm/package/node_rsa.cc
+silly asyncMap in gTP /home/MICROSOFT/node_modules/___rsa.npm/package/.gitignore
+silly asyncMap in gTP /home/MICROSOFT/node_modules/___rsa.npm/package/node_rsa.h
+silly asyncMap in gTP /home/MICROSOFT/node_modules/___rsa.npm/package/package.json
+silly asyncMap in gTP /home/MICROSOFT/node_modules/___rsa.npm/package/README.md
+silly asyncMap in gTP /home/MICROSOFT/node_modules/___rsa.npm/package/rsa.private
+silly asyncMap in gTP /home/MICROSOFT/node_modules/___rsa.npm/package/rsa.js
+silly asyncMap in gTP /home/MICROSOFT/node_modules/___rsa.npm/package/rsa.public
+silly asyncMap in gTP /home/MICROSOFT/node_modules/___rsa.npm/package/wscript
+silly asyncMap in gTP /home/MICROSOFT/node_modules/___rsa.npm/package/test/
+silly asyncMap in gTP /home/MICROSOFT/node_modules/___rsa.npm/package/test/test.js
+verbose gunzed /home/MICROSOFT/node_modules/___rsa.npm/package
+verbose rm'ed /home/MICROSOFT/node_modules/rsa
+verbose renamed [ '/home/MICROSOFT/node_modules/___rsa.npm/package',
+verbose renamed   '/home/MICROSOFT/node_modules/rsa' ]
+verbose has wscript [ undefined,
+verbose has wscript   { file: '/home/MICROSOFT/node_modules/rsa/package.json',
+verbose has wscript     serverjs: false,
+verbose has wscript     contributors: false,
+verbose has wscript     wscript: true } ]
+silly testEngine { name: 'rsa',
+silly testEngine   version: '0.0.1',
+silly testEngine   description: 'OpenSSL\'s RSA encrypt/decrypt routines',
+silly testEngine   keywords: [ 'openssl', 'crypto', 'rsa' ],
+silly testEngine   homepage: 'https://github.com/chrisa/node-rsa#readme',
+silly testEngine   author: { name: 'Chris Andrews', email: 'chris@nodnol.org' },
+silly testEngine   main: './rsa.js',
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/chrisa/node-rsa.git' },
+silly testEngine   scripts: { install: 'node-waf configure build' },
+silly testEngine   dependencies: {},
+silly testEngine   devDependencies: {},
+silly testEngine   _id: 'rsa@0.0.1',
+silly testEngine   engines: { node: '*' },
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.6',
+silly testEngine   _nodeVersion: 'v0.4.7',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/MICROSOFT/node_modules/rsa/package.json
+verbose loadDefaults rsa@0.0.1
+info preinstall rsa@0.0.1
+verbose from cache /home/MICROSOFT/node_modules/rsa/package.json
+verbose into /home/MICROSOFT/node_modules/rsa []
+silly resolved []
+verbose about to build /home/MICROSOFT/node_modules/rsa
+info build /home/MICROSOFT/node_modules/rsa
+verbose from cache /home/MICROSOFT/node_modules/rsa/package.json
+verbose linkStuff [ false, false, false, '/home/MICROSOFT/node_modules' ]
+info linkStuff rsa@0.0.1
+verbose linkBins rsa@0.0.1
+verbose linkMans rsa@0.0.1
+verbose rebuildBundles rsa@0.0.1
+info install rsa@0.0.1
+verbose unsafe-perm in lifecycle true
+silly exec sh "-c" "node-waf configure build"
+info rsa@0.0.1 Failed to exec install script
+ERR! error installing rsa@0.0.1 Error: rsa@0.0.1 install: `node-waf configure build`
+ERR! error installing rsa@0.0.1 `sh "-c" "node-waf configure build"` failed with 1
+ERR! error installing rsa@0.0.1     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/exec.js:49:20)
+ERR! error installing rsa@0.0.1     at ChildProcess.emit (events.js:67:17)
+ERR! error installing rsa@0.0.1     at ChildProcess.onexit (child_process.js:192:12)
+info unbuild /home/MICROSOFT/node_modules/rsa
+verbose from cache /home/MICROSOFT/node_modules/rsa/package.json
+info preuninstall rsa@0.0.1
+info uninstall rsa@0.0.1
+verbose unbuild rsa@0.0.1 [ false,
+verbose unbuild rsa@0.0.1   '/usr/local/lib/node_modules',
+verbose unbuild rsa@0.0.1   '/home/MICROSOFT/node_modules' ]
+info postuninstall rsa@0.0.1
+verbose installOne cb rsa@0.0.1
+ERR! rsa@0.0.1 install: `node-waf configure build`
+ERR! `sh "-c" "node-waf configure build"` failed with 1
+ERR! 
+ERR! Failed at the rsa@0.0.1 install script.
+ERR! This is most likely a problem with the rsa package,
+ERR! not with npm itself.
+ERR! Tell the author that this fails on your system:
+ERR!     node-waf configure build
+ERR! You can get their info via:
+ERR!     npm owner ls rsa
+ERR! There is likely additional logging output above.
+ERR! 
+ERR! System CYGWIN_NT-5.1 1.7.9(0.237/5/3)
+ERR! command "node" "/usr/local/bin/npm" "install" "rsa"
+verbose exit [ 1, true ]

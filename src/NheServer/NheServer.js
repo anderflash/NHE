@@ -6,7 +6,7 @@
  */
 
 // Import net package
-var net = require('net')
+var net = require('net');
 
 /*
 	Server Class Constructor
@@ -24,6 +24,9 @@ var Server = function()
 		socket.on('end', on_end);
 		socket.on('timeout', on_timeout);
 		
+		/**
+		* Return the xml file policy
+		*/
 		function policy()
 		{
 			var xml = '<?xml version="1.0"?>'+
@@ -36,6 +39,9 @@ var Server = function()
 			return xml;
 		}
 		
+		/**
+		* Executed when a client has sent data 
+		*/
 		function on_data(data)
 		{
 			
@@ -57,7 +63,7 @@ var Server = function()
 		}
 		
 		/**
-		* Executed when a cliented has connected 
+		* Executed when a client has connected 
 		*/
 		function on_connect()
 		{
@@ -74,20 +80,28 @@ var Server = function()
 			
 		}
 		
+		/**
+		* EVENT: Executed when a client has ended a connection
+		*/
 		function on_end()
 		{
 			sys.puts('on_end');
 			disconnect();
 		}
 		
+		/**
+		* Disconnect the client
+		* Remove-it from the list
+		* Warn others that he left (TODO)
+		*/
 		function disconnect()
 		{
 			sys.puts('disconnect');
-			for(var i = 0; i < socket_list.length; i++)
+			for(var i = 0; i < this.connection_lis.length; i++)
 			{
-				if(socket_list[i] == socket)
+				if(this.connection_list[i].getSocket == socket)
 				{
-					socket_list.splice(i, 1);
+					this.connection_list.splice(i, 1);
 					socket.end();
 					return;
 				}
@@ -107,23 +121,23 @@ var Server = function()
 		}
 		
 	});
-}
+};
 
 Server.prototype.getInstance = function()
 {
 	return new Server();
-}
+};
 
 Server.prototype.setAddress = function(host, port)
 {
 	this.host = host;
 	this.port = port;
-}
+};
 
 Server.prototype.startServer = function()
 {
 	
-}
+};
 
 var server = Server.getInstance();
 server.setAddress('127.0.0.1', 7000);
