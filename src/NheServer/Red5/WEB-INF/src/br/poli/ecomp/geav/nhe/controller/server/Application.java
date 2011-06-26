@@ -91,12 +91,14 @@ public class Application extends ApplicationAdapter
 	
 	public Boolean removeState()
 	{
-		
+		// TODO: fazer a remoção do módulo
+		return true;
 	}
 	
 	public Boolean simulateModel()
 	{
-		
+		// TODO: fazer a remoção do módulo
+		return true;
 	}
 	
 }
