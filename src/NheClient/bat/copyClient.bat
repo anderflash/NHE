@@ -1,0 +1,1 @@
+xcopy /Y /E "%~dp0..\bin-debug\*" "%1"

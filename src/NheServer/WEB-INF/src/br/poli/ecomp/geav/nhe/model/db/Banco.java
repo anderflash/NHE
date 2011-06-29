@@ -1,12 +1,12 @@
 package br.poli.ecomp.geav.nhe.model.db;
 
-import br.poli.ecomp.geav.nhe.model.db.aca.Acao;
-import br.poli.ecomp.geav.nhe.model.db.cmp.Composicao;
+import br.poli.ecomp.geav.nhe.model.db.aca.Action;
+import br.poli.ecomp.geav.nhe.model.db.cmp.Composition;
 import br.poli.ecomp.geav.nhe.model.db.per.Perfil;
-import br.poli.ecomp.geav.nhe.model.db.pro.Projeto;
-import br.poli.ecomp.geav.nhe.model.db.ptc.Participacao;
+import br.poli.ecomp.geav.nhe.model.db.pro.Project;
+import br.poli.ecomp.geav.nhe.model.db.ptc.Participation;
 import br.poli.ecomp.geav.nhe.model.db.tpa.TipoAcao;
-import br.poli.ecomp.geav.nhe.model.db.usu.Usuario;
+import br.poli.ecomp.geav.nhe.model.db.usr.User;
 
 public class Banco extends Database
 {
@@ -25,19 +25,19 @@ public class Banco extends Database
 	public static final String PARTICIPACAO_STR = "Participacao";
 	public static final String TIPOACAO_STR = "TipoAcao";
 	public static final String USUARIO_STR = "Usuario";
-	public static final Class<? extends Table> ACAO = Acao.class;
-	public static final Class<? extends Table> COMPOSICAO = Composicao.class;
-	public static final Class<? extends Table> PERFIL = Perfil.class;
-	public static final Class<? extends Table> PROJETO = Projeto.class;
-	public static final Class<? extends Table> PARTICIPACAO = Participacao.class;
+	public static final Class<? extends Table> ACAO = Action.class;
+	public static final Class<? extends Table> COMPOSITION = Composition.class;
+	public static final Class<? extends Table> PROFILE = Perfil.class;
+	public static final Class<? extends Table> PROJECT = Project.class;
+	public static final Class<? extends Table> PARTICIPACAO = Participation.class;
 	public static final Class<? extends Table> TIPOACAO = TipoAcao.class;
-	public static final Class<? extends Table> USUARIO = Usuario.class;
+	public static final Class<? extends Table> USUARIO = User.class;
 	private Banco()
 	{
 		criarRepositorio(ACA,ACAO_STR,ACAO);
-		criarRepositorio(CMP,COMPOSICAO_STR,COMPOSICAO);
-		criarRepositorio(PER,PERFIL_STR,PERFIL);
-		criarRepositorio(PRO,PROJETO_STR,PROJETO);
+		criarRepositorio(CMP,COMPOSICAO_STR,COMPOSITION);
+		criarRepositorio(PER,PERFIL_STR,PROFILE);
+		criarRepositorio(PRO,PROJETO_STR,PROJECT);
 		criarRepositorio(PTC,PARTICIPACAO_STR,PARTICIPACAO);
 		criarRepositorio(TPA,TIPOACAO_STR,TIPOACAO);
 		criarRepositorio(USU,USUARIO_STR,USUARIO);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties mainApplicationPath="NHEClient.as" projectUUID="2260ffff-ccba-475b-bb57-cdf77d731198" version="6">
-  <compiler additionalCompilerArguments="-locale en_US" autoRSLOrdering="true" copyDependentFiles="true" flexSDK="Flex 4.5" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
+<actionScriptProperties mainApplicationPath="br/poli/ecomp/geav/nhe/NHEClient.as" projectUUID="2260ffff-ccba-475b-bb57-cdf77d731198" version="6">
+  <compiler additionalCompilerArguments="-locale en_US" autoRSLOrdering="true" copyDependentFiles="false" flexSDK="Flex 4.5" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
@@ -25,15 +25,16 @@
         </excludedEntries>
       </libraryPathEntry>
       <libraryPathEntry kind="3" linkType="1" path="/Away3D/bin/Away3D.swc" useDefaultLinkType="false"/>
-      <libraryPathEntry kind="3" linkType="1" path="/MarzSDK/bin/MarzSDK.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="3" linkType="1" path="libs/ASFEAT.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="3" linkType="1" path="/NResponder/bin/NResponder.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="3" linkType="1" path="libs/apparat.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/AsWing/bin/AsWing.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/MarzSDK/bin/MarzSDK.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="NHEClient.as"/>
+    <application path="br/poli/ecomp/geav/nhe/NHEClient.as"/>
   </applications>
   <modules/>
   <buildCSSFiles/>

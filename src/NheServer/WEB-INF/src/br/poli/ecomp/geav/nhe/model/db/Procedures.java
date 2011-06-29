@@ -9,13 +9,16 @@ import java.util.Vector;
  */
 public class Procedures
 {
-	public static int PROCURAR_ACA = 1;
-	public static int PROCURAR_CMP = 2;
-	public static int PROCURAR_PER = 3;
-	public static int PROCURAR_PRO = 4;
-	public static int PROCURAR_PTC = 5;
-	public static int PROCURAR_TPA = 6;
-	public static int PROCURAR_USU = 7;
+	public static int ACT_SEARCH = 0;
+	public static int CMP_SEARCH = 1;
+	public static int PFL_SEARCH = 2;
+	public static int PRO_SEARCH = 3;
+	public static int PTC_SEARCH = 4;
+	public static int ATP_SEARCH = 5;
+	public static int USR_SEARCH = 6;
+	public static int USR_LOGIN = 7;
+	public static int PRO_CREATE = 8;
+	public static int PTC_CREATE = 9;
 	
 	private static Vector<String> prl_procedures;
 	
@@ -30,13 +33,16 @@ public class Procedures
 		{
 			prl_procedures = new Vector<String>();
 		
-			prl_procedures.add("PROCEDURE_PROCURAR_ACA");
-			prl_procedures.add("PROCEDURE_PROCURAR_CMP");
-			prl_procedures.add("PROCEDURE_PROCURAR_PER");
-			prl_procedures.add("PROCEDURE_PROCURAR_PRO");
-			prl_procedures.add("PROCEDURE_PROCURAR_PTC");
-			prl_procedures.add("PROCEDURE_PROCURAR_TPA");
-			prl_procedures.add("PROCEDURE_PROCURAR_USU");
+			prl_procedures.add("procedure_act_search");
+			prl_procedures.add("procedure_cmp_search");
+			prl_procedures.add("procedure_pfl_search");
+			prl_procedures.add("procedure_pro_search");
+			prl_procedures.add("procedure_ptc_search");
+			prl_procedures.add("procedure_atp_search");
+			prl_procedures.add("procedure_usr_search");
+			prl_procedures.add("procedure_usr_login");
+			prl_procedures.add("procedure_pro_create");
+			prl_procedures.add("procedure_ptc_create");
 		}
 	}
 	

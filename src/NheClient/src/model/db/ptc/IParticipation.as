@@ -1,3 +1,0 @@
-package model.db.ptc{	import marcozero.marzsdk.net.db.IMZTable;		import model.db.pfl.IProfile;	import model.db.pro.IProject;	import model.db.usr.IUser;
-
-	public interface IParticipation extends IMZTable	{		function set ptc_identificador(value:Number):void;		function set pro_identificador(value:IProject):void;		function set usr_identificador(value:IUser):void;		function set pfl_identificador(value:IProfile):void;		function get ptc_identificador():Number;		function get pro_identificador():IProject;		function get usr_identificador():IUser;		function get pfl_identificador():IProfile;	}}

@@ -41,6 +41,21 @@
         <servlet-class>org.red5.server.net.servlet.AMFGatewayServlet</servlet-class>
     </servlet>
     
+	<servlet>
+		<servlet-name>fileupload</servlet-name>
+		<servlet-class>br.ecomp.poli.geav.nhe.controller.server.FileUploadServlet</servlet-class>
+		<init-param>
+			<param-name>uploadFolder</param-name>
+			<param-value>uploads</param-value>
+		</init-param>
+	</servlet>
+	
+	<servlet-mapping>
+	  <servlet-name>fileupload</servlet-name>
+	  <url-pattern>/fileupload</url-pattern>
+	</servlet-mapping>
+
+	
     <servlet-mapping>
         <servlet-name>gateway</servlet-name>
         <url-pattern>/gateway</url-pattern>

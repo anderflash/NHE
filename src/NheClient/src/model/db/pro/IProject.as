@@ -1,3 +1,0 @@
-package model.db.pro{	import marcozero.marzsdk.net.db.IMZTable;		import model.db.act.IAction;
-
-	public interface IProject extends IMZTable	{		function set pro_identificador(value:Number):void;		function set pro_titulo(value:Number):void;		function set pro_descricao(value:Number):void;		function set pro_basico(value:Number):void;		function set pro_finalizado(value:Number):void;		function set aca_identificador(value:IAction):void;		function get pro_identificador():Number;		function get pro_titulo():Number;		function get pro_descricao():Number;		function get pro_basico():Number;		function get pro_finalizado():Number;		function get aca_identificador():IAction;	}}
