@@ -24,13 +24,13 @@ package br.poli.ecomp.geav.nhe.view.world
 			arProjectionMatrix.rawData = getProjectionMatrix(viewportToSourceWidthRatio);
 			
 			lens = new PerspectiveLens();
-			this.zoom = 0.01 * arProjectionMatrix.rawData[0];
+			//this.zoom = 0.01 * arProjectionMatrix.rawData[0];
 		}
 		
 		public function updateProjectionMatrix(viewportToSourceWidthRatio:Number = 1.0):void
         {
             arProjectionMatrix.rawData = getProjectionMatrix(viewportToSourceWidthRatio);
-            this.zoom = 0.01 * arProjectionMatrix.rawData[0];
+            //this.zoom = 0.01 * arProjectionMatrix.rawData[0];
         }
 		
 		protected function getProjectionMatrix(ratio:Number = 1.0):Vector.<Number>

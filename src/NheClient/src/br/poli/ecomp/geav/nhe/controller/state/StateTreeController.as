@@ -6,21 +6,22 @@ package br.poli.ecomp.geav.nhe.controller.state
 	{
 		private var _prl_state_controllers:Vector.<StateController>;
 		
-		private var _pao_state_tree_widget:StateTreeView;
+		private var _pao_state_tree_view:StateTreeView;
 		
 		public function StateTreeController()
 		{
 			this._prl_state_controllers = new Vector.<StateController>();
+			_pao_state_tree_view = new StateTreeView(640,190);
 		}
 
-		public function get pao_state_tree_widget():StateTreeView
+		public function get pao_state_tree_view():StateTreeView
 		{
-			return _pao_state_tree_widget;
+			return _pao_state_tree_view;
 		}
 
-		public function set pao_state_tree_widget(value:StateTreeView):void
+		public function set pao_state_tree_view(value:StateTreeView):void
 		{
-			_pao_state_tree_widget = value;
+			_pao_state_tree_view = value;
 		}
 
 		public function get prl_state_controllers():Vector.<StateController>

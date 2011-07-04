@@ -1,1 +1,0 @@
-package br.poli.ecomp.geav.nhe.model.db.per;import br.poli.ecomp.geav.nhe.model.db.ITable;	public interface IPerfil extends ITable	{		void set_per_identificador(int value);		void set_per_descricao(String value);		int get_per_identificador();		String get_per_descricao();	}

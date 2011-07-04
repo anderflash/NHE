@@ -3,6 +3,7 @@
 	<name>NHEClient</name>
 	<comment></comment>
 	<projects>
+		<project>MarzSDK</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

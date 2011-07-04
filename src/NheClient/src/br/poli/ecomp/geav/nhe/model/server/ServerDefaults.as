@@ -14,7 +14,7 @@ package br.poli.ecomp.geav.nhe.model.server
 		public static var SEPARATOR_REQUESTS:String = String.fromCharCode(1);
 		public static var SEPARATOR_FIELDS:String = String.fromCharCode(2);
 		
-		public static var FILE_UPLOAD_SERVLET:String = "fileUpload";
+		public static var FILE_UPLOAD_SERVLET:String = "fileupload";
 		
 		/*-------------------------------------------
 		 * REQUESTS
@@ -139,6 +139,9 @@ package br.poli.ecomp.geav.nhe.model.server
 		public static const FUNCTION_LOGOUT:String = "logout";
 		
 		public static const FUNCTION_CREATE_PROJECT:String = "createProject";
+		public static const FUNCTION_LIST_PROJECTS:String = "listProjects";
+		
+		public static const FUNCTION_VIEW_PROJECT:String = "viewProject";
 			
 		public function ServerDefaults()
 		{

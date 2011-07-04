@@ -43,7 +43,7 @@
     
 	<servlet>
 		<servlet-name>fileupload</servlet-name>
-		<servlet-class>br.ecomp.poli.geav.nhe.controller.server.FileUploadServlet</servlet-class>
+		<servlet-class>br.poli.ecomp.geav.nhe.controller.server.FileUploadServlet</servlet-class>
 		<init-param>
 			<param-name>uploadFolder</param-name>
 			<param-value>uploads</param-value>

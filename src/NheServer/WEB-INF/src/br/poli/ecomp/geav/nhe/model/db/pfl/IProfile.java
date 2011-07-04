@@ -1,0 +1,1 @@
+package br.poli.ecomp.geav.nhe.model.db.pfl;import br.poli.ecomp.geav.nhe.model.db.ITable;	public interface IProfile extends ITable	{		void set_pfl_identificador(int value);		void set_pfl_descricao(String value);		int get_pfl_identificador();		String get_pfl_descricao();	}

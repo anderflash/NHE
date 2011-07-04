@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties mainApplicationPath="br/poli/ecomp/geav/nhe/NHEClient.as" projectUUID="2260ffff-ccba-475b-bb57-cdf77d731198" version="6">
+<actionScriptProperties mainApplicationPath="tests/br/poli/ecomp/geav/nhe/TestStarter.as" projectUUID="2260ffff-ccba-475b-bb57-cdf77d731198" version="6">
   <compiler additionalCompilerArguments="-locale en_US" autoRSLOrdering="true" copyDependentFiles="false" flexSDK="Flex 4.5" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="0">
@@ -30,10 +30,13 @@
       <libraryPathEntry kind="3" linkType="1" path="libs/apparat.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="3" linkType="1" path="/AsWing/bin/AsWing.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="3" linkType="1" path="/MarzSDK/bin/MarzSDK.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/ASUnit/bin/ASUnit.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
   <applications>
+    <application path="tests/br/poli/ecomp/geav/nhe/TestStarter.as"/>
+    <application path="br/poli/ecomp/geav/nhe/TestJPanel.as"/>
     <application path="br/poli/ecomp/geav/nhe/NHEClient.as"/>
   </applications>
   <modules/>

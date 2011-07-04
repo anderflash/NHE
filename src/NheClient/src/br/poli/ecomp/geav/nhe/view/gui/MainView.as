@@ -2,6 +2,9 @@ package br.poli.ecomp.geav.nhe.view.gui
 {
 	import appkit.responders.NResponder;
 	
+	import br.poli.ecomp.geav.nhe.model.db.Database;
+	import br.poli.ecomp.geav.nhe.model.db.pro.Project;
+	
 	import flash.events.MouseEvent;
 	
 	import org.aswing.AsWingConstants;
@@ -11,7 +14,9 @@ package br.poli.ecomp.geav.nhe.view.gui
 	import org.aswing.JMenu;
 	import org.aswing.JToolBar;
 	import org.aswing.SoftBoxLayout;
+	import org.aswing.VectorListModel;
 	import org.aswing.event.InteractiveEvent;
+	import org.aswing.event.ListItemEvent;
 	
 	public class MainView extends JFrame
 	{
@@ -20,6 +25,7 @@ package br.poli.ecomp.geav.nhe.view.gui
 		public static const LOGOUT_CLICKED:String = "LOGOUT_CLICKED";
 		public static const ABOUT_CLICKED:String = "ABOUT_CLICKED";
 		
+		private var vct_projects:VectorListModel;
 		
 		private var lst_projects:JList;
 		private var tbr_toolbar:JToolBar;
@@ -45,7 +51,8 @@ package br.poli.ecomp.geav.nhe.view.gui
 			
 			btn_about = new JButton("&About");
 			
-			lst_projects = new JList();
+			vct_projects = new VectorListModel();
+			lst_projects = new JList(vct_projects);
 			lst_projects.setVisibleRowCount(10);
 			
 			//component layoution
@@ -64,16 +71,34 @@ package br.poli.ecomp.geav.nhe.view.gui
 			setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		}
 		
+		public function listProjects(projects:Array):void
+		{
+			
+			vct_projects.clear();
+			for(var i:uint = 0; i < projects.length; i++)
+			{
+				var projeto:Project = new Project();
+				projeto.pro_identificador = projects[i][0];
+				projeto.pro_title = projects[i][1];
+				projeto.pro_description = projects[i][2];
+				projeto.pro_primitive = projects[i][3];
+				projeto.pro_finished = projects[i][4];
+				projeto.act_identificador = projects[i][5];
+				projeto.pro_model_path = projects[i][6];
+				vct_projects.append(projeto);
+			}
+		}
+		
 		private function configureListeners():void
 		{
-			NResponder.addNative(lst_projects, InteractiveEvent.STATE_CHANGED, list_projects_state_changed);
+			NResponder.addNative(lst_projects, ListItemEvent.ITEM_CLICK, list_projects_item_clicked_event);
 			NResponder.addNative(btn_view_project, MouseEvent.CLICK, btn_view_project_click_event);
 			NResponder.addNative(btn_create_project, MouseEvent.CLICK, btn_create_project_click_event);
 			NResponder.addNative(btn_about, MouseEvent.CLICK, btn_about_click_event);
 			NResponder.addNative(btn_logout, MouseEvent.CLICK, btn_logout_click_event);
 		}
 		
-		private function list_projects_state_changed(e:InteractiveEvent):void
+		private function list_projects_item_clicked_event(e:ListItemEvent):void
 		{
 			btn_view_project_update_enabled();
 		}
@@ -84,6 +109,11 @@ package br.poli.ecomp.geav.nhe.view.gui
 				btn_view_project.setEnabled(true);
 			else
 				btn_view_project.setEnabled(false);
+		}
+		
+		public function get selected_project():Project
+		{
+			return lst_projects.getSelectedValue() as Project;
 		}
 		
 		private function btn_create_project_click_event(e:MouseEvent):void

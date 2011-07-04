@@ -101,27 +101,6 @@ package br.poli.ecomp.geav.nhe.view
 				scene.addChild(plane);
 				
 			}
-			var botao:Sprite = new Sprite();
-			botao.graphics.beginFill(0x00ffff);
-			botao.graphics.drawRoundRect(0,0,150,50,10,10);
-			botao.graphics.endFill();
-			addChild(botao);
-			var texto:TextField = new TextField();
-			var formato:TextFormat = new TextFormat();
-			formato.color = 0xffffff;
-			texto.autoSize = TextFieldAutoSize.CENTER;
-			texto.defaultTextFormat = formato;
-			texto.setTextFormat(formato);
-			texto.x = (botao.width - texto.width)/2;
-			texto.y = (botao.height - texto.height)/2;
-			botao.addChild(texto);
-			botao.buttonMode = true;
-			var botaoHandle:Function = function(e:MouseEvent):void
-			{
-				stage.displayState = StageDisplayState.FULL_SCREEN;
-			};
-			botao.addEventListener(MouseEvent.CLICK, botaoHandle);
-			
 			var stageResizeHandler:Function = function(e:Event):void
 			{
 				//removeChild(view);

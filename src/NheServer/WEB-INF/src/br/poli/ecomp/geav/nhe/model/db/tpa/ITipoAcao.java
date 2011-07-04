@@ -1,1 +1,0 @@
-package br.poli.ecomp.geav.nhe.model.db.tpa;import br.poli.ecomp.geav.nhe.model.db.ITable;	public interface ITipoAcao extends ITable{	void set_tpa_identificador(int value);	void set_tpa_nome(String value);	int get_tpa_identificador();	String get_tpa_nome();}

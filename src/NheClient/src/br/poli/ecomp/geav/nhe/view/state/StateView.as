@@ -1,94 +1,138 @@
-package view.state
+package br.poli.ecomp.geav.nhe.view.state
 {
-	import br.poli.ecomp.geav.nhe.controller.state.StateController;
-	
-	import flash.display.Sprite;
-	
-	import br.poli.ecomp.geav.nhe.model.state.State;
-	
 	import br.poli.ecomp.geav.nhe.view.util.ITooltipavel;
 	
-	public class StateView extends Sprite implements ITooltipavel;
+	import flash.display.Sprite;
+	import flash.events.MouseEvent;
+	import flash.geom.Point;
+	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
+	
+	public class StateView extends Sprite implements ITooltipavel
 	{
-		private var sprite:IStateWidget;
-		private var controller:StateController;
+		private var tf_label:TextField;
 		
-		private var _pas_state_text:String;
-		private var _pas_tooltip_text:String;
+		private var tf_message:TextField;
 		
-		public function StateWidget()
+		private var _label:String;
+		private var _message:String;
+		private var prb_show_tooltip:Boolean;
+		
+		public function StateView()
 		{
 			super();
+			tf_label = new TextField();
+			tf_label.background = true;
+			tf_label.backgroundColor = 0xffffff;
+			tf_label.border = true;
+			tf_label.borderColor = 0x00aa00;
+			tf_label.autoSize = TextFieldAutoSize.LEFT;
+			addChild(tf_label);
+			mouseChildren = false;
+			addEventListener(MouseEvent.MOUSE_OVER, statewidget_mouse_over_event);
+			addEventListener(MouseEvent.MOUSE_OUT, statewidget_mouse_out_event);
+			addEventListener(MouseEvent.MOUSE_MOVE, statewidget_mouse_move_event);
+			
+			tf_message = new TextField();
+			tf_message.background = true;
+			tf_message.backgroundColor = 0xcccccc;
+			tf_message.mouseEnabled = false;
+			tf_message.autoSize = TextFieldAutoSize.LEFT;
+			
+			tooltip_enable();
 		}
-		
-		public function draw():void
-		{
-			sprite
-		}
-		
 		
 		/**
-		 *  
+		 * Show the tooltip if the mouse is over the state  
+		 * @param e
 		 * 
 		 */
-		public function enable():void
+		private function statewidget_mouse_over_event(e:MouseEvent):void
 		{
-			
+			if(prb_show_tooltip)
+				addChild(tf_message);
 		}
 		
 		/**
-		 *  
-		 * 
-		 */		
-		public function disable():void
+		 * Remove the tooltip if the mouse is out of the state 
+		 * @param e
+		 */
+		private function statewidget_mouse_out_event(e:MouseEvent):void
 		{
-			
+			if(tf_message.parent)
+				removeChild(tf_message);
 		}
 		
 		/**
-		 *  
+		 * If the mouse is moving over the state widget,
+		 * place the tooltip always above and near the mouse 
+		 * @param e
 		 * 
-		 */		
-		public function select():void
+		 */
+		private function statewidget_mouse_move_event(e:MouseEvent):void
 		{
-			
+			tf_message.x = mouseX;
+			tf_message.y = mouseY - tf_message.height;
+			var globalPoint:Point = localToGlobal(new Point(tf_message.x, tf_message.y));
+			if(globalPoint.y < 0)
+				tf_message.y -= globalPoint.y;
+			if(globalPoint.y + tf_message.height > stage.stageHeight)
+				tf_message.y = stage.stageHeight - tf_message.height;
+			if(globalPoint.x < 0)
+				tf_message.x -= globalPoint.x;
+			if(globalPoint.x + tf_message.width > stage.stageWidth)
+				tf_message.x = stage.stageWidth - tf_message.width;
 		}
 		
-		public function get pas_state_text():String
+		/**
+		 * Gets/Sets the label text of the state 
+		 * @return 
+		 * 
+		 */
+		public function get label():String
 		{
-			return this._pas_state_text;
+			return _label;
 		}
 		
-		public function set pas_state_text(value:String):void
+		/**
+		 * @private
+		 */
+		public function set label(value:String):void
 		{
-			this._pas_state_text = value;
+			_label = value;
+			tf_label.text = value;
 		}
 		
-		public function get pas_tooltip_text():String
+		/**
+		 * Gets/Sets the tooltip message
+		 * @return 
+		 * 
+		 */
+		public function get message():String
 		{
-			return this._pas_tooltip_text;
+			return _message;
 		}
 		
-		public function set pas_tooltip_text(value:String):void
+		/**
+		 * @private
+		 */
+		public function set message(value:String):void
 		{
-			this._pas_tooltip_text = value;
+			_message = value;
+			tf_message.text = value;
 		}
 		
 		
 		public function tooltip_enable():void
 		{
-			
+			prb_show_tooltip = true;
 		}
 		
 		public function tooltip_disable():void
 		{
-			
+			prb_show_tooltip = false;			
 		}
 		
-		public function tooltip_get():Sprite
-		{
-			
-		}
 		
 	}
 }

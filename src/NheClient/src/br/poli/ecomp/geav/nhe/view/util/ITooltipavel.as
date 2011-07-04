@@ -15,12 +15,5 @@ package br.poli.ecomp.geav.nhe.view.util
 		 * 
 		 */
 		function tooltip_disable():void;
-		
-		/**
-		 * Get the tooltip 
-		 * @return 
-		 * 
-		 */
-		function tooltip_get():Sprite;
 	}
 }

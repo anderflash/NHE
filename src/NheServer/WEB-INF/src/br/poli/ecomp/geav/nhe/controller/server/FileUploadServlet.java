@@ -15,6 +15,7 @@ import br.poli.ecomp.geav.nhe.model.util.UnZip;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 
@@ -34,65 +35,76 @@ public class FileUploadServlet extends HttpServlet
 	@Override
 	public void doPost( HttpServletRequest request, HttpServletResponse response )
 	{
-		/**
-		 * Create a factory for new disk-based file items
-		 */
-		FileItemFactory factory = new DiskFileItemFactory();
-		/**
-		 * Create a new file upload handler
-		 */
-		ServletFileUpload upload = new ServletFileUpload(factory);
 		try
 		{
-			/**
-			 * Parsing input request
-			 */
-			List items = upload.parseRequest(request);
-			/**
-			 * Process the uploaded items
-			 */
-			Iterator iter = items.iterator();
-			while (iter.hasNext())
-			{
-				FileItem item = (FileItem) iter.next();
+			boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+			if (isMultipart) {
+				FileItemFactory factory = new DiskFileItemFactory();
+	
+				ServletFileUpload upload = new ServletFileUpload(factory);
+			
 				/**
-				 * handling a normal form-field
+				 * Parsing input request
 				 */
-				if (item.isFormField())
+				List items = upload.parseRequest(request);
+				/**
+				 * Process the uploaded items
+				 */
+				Iterator iter = items.iterator();
+				String pro_identificador = "geral";
+				while (iter.hasNext())
 				{
-					System.out.println("A form field");
-				}
-				else
-				{
+					FileItem item = (FileItem) iter.next();
 					/**
-					 * handling file uploads
+					 * handling a normal form-field
 					 */
-					System.out.println("Not a form field");
-					String uploadFileName = item.getName();
-					byte[] data = item.get();
-					/**
-					 * Gets directory to which the file is to be uploaded
-					 */
-					String uploadFolder = getServletConfig().getInitParameter("uploadFolder");
-					String fileFolderName = getServletContext().getRealPath(uploadFolder + "\\"+uploadFileName);
-					try
+					
+					if (item.isFormField())
 					{
-						FileOutputStream fileOutSt = new FileOutputStream(fileFolderName);
+						if(item.getFieldName().equalsIgnoreCase("pro_identificador"))
+						{
+							System.out.println("Pegou pro_identificador");
+							pro_identificador = item.getString();
+							
+						}
+						System.out.println("A form field: " + item.getFieldName() + ": " + item.getString());
+					}
+					else
+					{
+						/**
+						 * handling file uploads
+						 */
+						System.out.println("Not a form field");
+						String uploadFileName = item.getName();
+						byte[] data = item.get();
+						/**
+						 * Gets directory to which the file is to be uploaded
+						 */
+						String uploadFolder = getServletConfig().getInitParameter("uploadFolder");
+						/*if(getServletConfig().getInitParameter("pro_identificador") != null)
+							pro_identificador = getServletConfig().getInitParameter("pro_identificador");*/
+						new File(getServletContext().getRealPath(uploadFolder) + "\\" + pro_identificador).mkdir();
+						System.err.println("pro_identificador = " + pro_identificador);
+						String fileFolderName = getServletContext().getRealPath(uploadFolder + "\\"+ pro_identificador + "\\" + uploadFileName);
 						try
 						{
-							fileOutSt.write(data);
-							fileOutSt.close();
-							if(uploadFileName.endsWith(".zip"))
-								UnZip.unzipFile(fileFolderName);
+							FileOutputStream fileOutSt = new FileOutputStream(fileFolderName);
+							try
+							{
+								fileOutSt.write(data);
+								fileOutSt.close();
+								if(uploadFileName.endsWith(".zip"))
+									UnZip.unzip(new File(fileFolderName), new File(getServletContext().getRealPath(uploadFolder) + "\\" + pro_identificador));//unzipFile(getServletContext().getRealPath(uploadFolder+ "\\"+ pro_identificador), uploadFileName);
+							}
+							catch(IOException exception)
+							{
+								exception.printStackTrace();
+							}
 						}
-						catch(IOException exception)
+						catch(FileNotFoundException exception)
 						{
 							exception.printStackTrace();
 						}
-					}
-					catch(FileNotFoundException exception)
-					{
-						exception.printStackTrace();
 					}
 				}
 			}
@@ -103,4 +115,3 @@ public class FileUploadServlet extends HttpServlet
 		}
 	}
 }
-
