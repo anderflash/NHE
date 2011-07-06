@@ -20,6 +20,10 @@ package br.poli.ecomp.geav.nhe.model.state
 		private var _prl_children:Vector.<State>;
 		private var _pao_action:Action;
 		
+		
+		/*-------------------------------------------
+		 * 				PUBLIC METHODS
+		 --------------------------------------------*/
 		public function State()
 		{
 			_prl_children = new Vector.<State>();
@@ -49,9 +53,7 @@ package br.poli.ecomp.geav.nhe.model.state
 		public function addChildAt(child:State, index:Number):void
 		{
 			if(_prl_children.indexOf(child) != -1)
-			{
 				_prl_children.splice(_prl_children.indexOf(child),1);
-			}
 			_prl_children.splice(index,0,child);
 			child.pro_parent = this;
 		}
@@ -151,24 +153,6 @@ package br.poli.ecomp.geav.nhe.model.state
 				return false;
 			}
 		}
-		
-		/**
-		 * Return the level of the state, relative to the root state
-		 * (root has depth = 0) 
-		 * @return the level of the state, from 0 to N 
-		 */
-		public function get prn_depth():Number
-		{
-			var level:Number = 0;
-			var stateTmp:State = this;
-			while(stateTmp.parent != null)
-			{
-				level++;
-				stateTmp = stateTmp.parent;
-			}
-			return level;
-		}
-		
 		/**
 		 * Returns the level based on a ancestor (can be root or not)
 		 * @param ancestor
@@ -187,22 +171,6 @@ package br.poli.ecomp.geav.nhe.model.state
 			}
 			throw new StateError(StateError.NOT_ANCESTOR_ERROR, "You can't calculate depth if the parameter is not ancestor");
 		}
-		
-		/**
-		 * Get the root of this state
-		 * @return 
-		 * 
-		 */
-		public function get pro_root():State
-		{
-			var stateTmp:State = this;
-			while(stateTmp.parent != null)
-			{
-				stateTmp = stateTmp.parent;
-			}
-			return stateTmp;
-		}
-		
 		/**
 		 * Search a child (or other descendant) which has the action parameter
 		 * @param action
@@ -222,7 +190,42 @@ package br.poli.ecomp.geav.nhe.model.state
 				return null;
 			}
 		}
-
+		
+		/*-------------------------------------------
+		* 				  PROPERTIES
+		--------------------------------------------*/
+		/**
+		 * Return the level of the state, relative to the root state
+		 * (root has depth = 0) 
+		 * @return the level of the state, from 0 to N 
+		 */
+		public function get prn_depth():Number
+		{
+			var level:Number = 0;
+			var stateTmp:State = this;
+			while(stateTmp.parent != null)
+			{
+				level++;
+				stateTmp = stateTmp.parent;
+			}
+			return level;
+		}
+		
+		/**
+		 * Get the root of this state
+		 * @return 
+		 * 
+		 */
+		public function get pro_root():State
+		{
+			var stateTmp:State = this;
+			while(stateTmp.parent != null)
+			{
+				stateTmp = stateTmp.parent;
+			}
+			return stateTmp;
+		}
+		
 		/**
 		 * Returns the state parent 
 		 * @return 
@@ -257,7 +260,7 @@ package br.poli.ecomp.geav.nhe.model.state
 		{
 			return _prl_children;
 		}
-
+		
 		/**
 		 * 
 		 * @param value
@@ -268,12 +271,12 @@ package br.poli.ecomp.geav.nhe.model.state
 			_pao_action = value;
 			NResponder.dispatch(ACTION_CHANGED,[this]);
 		}
-
+		
 		public function get pro_parent():State
 		{
 			return _pro_parent;
 		}
-
+		
 		public function set pro_parent(value:State):void
 		{
 			_pro_parent = value;
