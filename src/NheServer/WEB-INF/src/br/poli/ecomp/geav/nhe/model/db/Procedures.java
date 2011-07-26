@@ -19,6 +19,7 @@ public class Procedures
 	public static int USR_LOGIN = 7;
 	public static int PRO_CREATE = 8;
 	public static int PTC_CREATE = 9;
+	public static int PRO_SEARCH_USR = 10;
 	
 	private static Vector<String> prl_procedures;
 	
@@ -43,6 +44,7 @@ public class Procedures
 			prl_procedures.add("procedure_usr_login");
 			prl_procedures.add("procedure_pro_create");
 			prl_procedures.add("procedure_ptc_create");
+			prl_procedures.add("procedure_pro_search_usr");
 		}
 	}
 	

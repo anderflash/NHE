@@ -17,12 +17,16 @@ package br.poli.ecomp.geav.nhe.model.state
 		public static const ACTION_CHANGED:String = "ACTION_CHANGED";
 		
 		private var _pro_parent:State;
-		private var prl_children:Vector.<State>;
+		private var _prl_children:Vector.<State>;
 		private var _pao_action:Action;
 		
+		
+		/*-------------------------------------------
+		 * 				PUBLIC METHODS
+		 --------------------------------------------*/
 		public function State()
 		{
-			prl_children = new Vector.<State>();
+			_prl_children = new Vector.<State>();
 		}
 		
 		/**
@@ -32,11 +36,11 @@ package br.poli.ecomp.geav.nhe.model.state
 		 */
 		public function addChild(child:State):void
 		{
-			if(prl_children.indexOf(child) != -1)
+			if(_prl_children.indexOf(child) != -1)
 			{
-				prl_children.splice(prl_children.indexOf(child),1);
+				_prl_children.splice(_prl_children.indexOf(child),1);
 			}
-			prl_children.push(child);
+			_prl_children.push(child);
 			child.pro_parent = this;
 		}
 		
@@ -48,11 +52,9 @@ package br.poli.ecomp.geav.nhe.model.state
 		 */
 		public function addChildAt(child:State, index:Number):void
 		{
-			if(prl_children.indexOf(child) != -1)
-			{
-				prl_children.splice(prl_children.indexOf(child),1);
-			}
-			prl_children.splice(index,0,child);
+			if(_prl_children.indexOf(child) != -1)
+				_prl_children.splice(_prl_children.indexOf(child),1);
+			_prl_children.splice(index,0,child);
 			child.pro_parent = this;
 		}
 		
@@ -62,15 +64,16 @@ package br.poli.ecomp.geav.nhe.model.state
 		 * @throws StateError with type StateError.BEYOND_RANGE_ERROR
 		 * 
 		 */
-		public function removeChildAt(index:Number):void
+		public function removeChildAt(index:Number):State
 		{
-			if(index >= prl_children.length) throw new StateError(StateError.BEYOND_RANGE_ERROR, "The index is beyond the range");
+			if(index >= _prl_children.length) throw new StateError(StateError.BEYOND_RANGE_ERROR, "The index is beyond the range");
 			else
 			{
-				var child:State = prl_children[index];
-				prl_children.splice(index,1);
+				var child:State = _prl_children[index];
+				_prl_children.splice(index,1);
 				child.pro_parent = null;
 			}
+			return child;
 		}
 		
 		/**
@@ -78,14 +81,15 @@ package br.poli.ecomp.geav.nhe.model.state
 		 * @param child
 		 * 
 		 */
-		public function removeChild(child:State):void
+		public function removeChild(child:State):State
 		{
-			if(prl_children.indexOf(child) == -1) throw new StateError(StateError.NOT_CHILD_ERROR, "The parameter is not child of this state");
+			if(_prl_children.indexOf(child) == -1) throw new StateError(StateError.NOT_CHILD_ERROR, "The parameter is not child of this state");
 			else
 			{
-				prl_children.splice(prl_children.indexOf(child),1);
-				child.pro_parent = null;
+				var state:State = _prl_children.splice(_prl_children.indexOf(child),1)[0];
+				state.pro_parent = null;
 			}
+			return state;
 		}
 		
 		/**
@@ -95,22 +99,23 @@ package br.poli.ecomp.geav.nhe.model.state
 		 * 
 		 * 
 		 */
-		public function clone(deep:Boolean):State
+		public function clone(deep:Boolean = false):State
 		{
 			var newState:State = new State();
+			newState._pao_action = pao_action;
 			
 			if(deep)
 			{
-				for(var i:uint = 0; i < prl_children.length; i++)
+				for(var i:uint = 0; i < _prl_children.length; i++)
 				{
-					newState.prl_children.push(prl_children[i].clone(true));
+					newState._prl_children.push(_prl_children[i].clone(true));
 				}
 			}
 			else
 			{
-				for(var i:uint = 0; i < prl_children.length; i++)
+				for(i = 0; i < _prl_children.length; i++)
 				{
-					newState.prl_children.push(prl_children[i]);
+					newState._prl_children.push(_prl_children[i]);
 				}
 			}
 			return newState;
@@ -135,37 +140,19 @@ package br.poli.ecomp.geav.nhe.model.state
 			return false;
 		}
 		
-		public function isDescendent(descedent:state):Boolean
+		public function isDescendent(descedent:State):Boolean
 		{
-			if(prl_children.length == 0) return false;
-			else if(prl_children.indexOf(descedent) != -1) return true;
+			if(_prl_children.length == 0) return false;
+			else if(_prl_children.indexOf(descedent) != -1) return true;
 			else
 			{
-				for(var i:uint = 0; i < prl_children.length; i++)
+				for(var i:uint = 0; i < _prl_children.length; i++)
 				{
-					if(prl_children[i].isDescendent(descedent)) return true;
+					if(_prl_children[i].isDescendent(descedent)) return true;
 				}
 				return false;
 			}
 		}
-		
-		/**
-		 * Return the level of the state, relative to the root state
-		 * (root has depth = 0) 
-		 * @return the level of the state, from 0 to N 
-		 */
-		public function get depth():Number
-		{
-			var level:Number = 0;
-			var stateTmp:State = this;
-			while(stateTmp.parent != null)
-			{
-				level++;
-				stateTmp = stateTmp.parent;
-			}
-			return level;
-		}
-		
 		/**
 		 * Returns the level based on a ancestor (can be root or not)
 		 * @param ancestor
@@ -184,22 +171,6 @@ package br.poli.ecomp.geav.nhe.model.state
 			}
 			throw new StateError(StateError.NOT_ANCESTOR_ERROR, "You can't calculate depth if the parameter is not ancestor");
 		}
-		
-		/**
-		 * Get the root of this state
-		 * @return 
-		 * 
-		 */
-		public function get root():State
-		{
-			var stateTmp:State = this;
-			while(stateTmp.parent != null)
-			{
-				stateTmp = stateTmp.parent;
-			}
-			return stateTmp;
-		}
-		
 		/**
 		 * Search a child (or other descendant) which has the action parameter
 		 * @param action
@@ -209,18 +180,52 @@ package br.poli.ecomp.geav.nhe.model.state
 		public function searchFromAction(action:Action):State
 		{
 			if(pao_action == action) return this;
-			else if(prl_children.length == 0) return null;
 			else
 			{
-				for(var i:uint = 0; i < prl_children.length; i++)
+				for(var i:uint = 0; i < _prl_children.length; i++)
 				{
-					var actionChild:Action = prl_children[i].searchFromAction(action);
+					var actionChild:State = _prl_children[i].searchFromAction(action);
 					if(actionChild != null) return actionChild; 
 				}
 				return null;
 			}
 		}
-
+		
+		/*-------------------------------------------
+		* 				  PROPERTIES
+		--------------------------------------------*/
+		/**
+		 * Return the level of the state, relative to the root state
+		 * (root has depth = 0) 
+		 * @return the level of the state, from 0 to N 
+		 */
+		public function get prn_depth():Number
+		{
+			var level:Number = 0;
+			var stateTmp:State = this;
+			while(stateTmp.parent != null)
+			{
+				level++;
+				stateTmp = stateTmp.parent;
+			}
+			return level;
+		}
+		
+		/**
+		 * Get the root of this state
+		 * @return 
+		 * 
+		 */
+		public function get pro_root():State
+		{
+			var stateTmp:State = this;
+			while(stateTmp.parent != null)
+			{
+				stateTmp = stateTmp.parent;
+			}
+			return stateTmp;
+		}
+		
 		/**
 		 * Returns the state parent 
 		 * @return 
@@ -236,9 +241,9 @@ package br.poli.ecomp.geav.nhe.model.state
 		 * @return 
 		 * 
 		 */
-		public function get numChildren():Number
+		public function get prn_num_children():Number
 		{
-			return prl_children.length;
+			return _prl_children.length;
 		}
 		
 		/**
@@ -250,7 +255,12 @@ package br.poli.ecomp.geav.nhe.model.state
 		{
 			return _pao_action;
 		}
-
+		
+		public function get prl_children():Vector.<State>
+		{
+			return _prl_children;
+		}
+		
 		/**
 		 * 
 		 * @param value
@@ -261,12 +271,12 @@ package br.poli.ecomp.geav.nhe.model.state
 			_pao_action = value;
 			NResponder.dispatch(ACTION_CHANGED,[this]);
 		}
-
+		
 		public function get pro_parent():State
 		{
 			return _pro_parent;
 		}
-
+		
 		public function set pro_parent(value:State):void
 		{
 			_pro_parent = value;

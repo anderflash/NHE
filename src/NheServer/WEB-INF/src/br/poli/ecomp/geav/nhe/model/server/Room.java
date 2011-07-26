@@ -1,5 +1,6 @@
 package br.poli.ecomp.geav.nhe.model.server;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.red5.server.api.IConnection;
@@ -11,6 +12,11 @@ public class Room
 {
 	public List<ConnectedUser> connected_users;
 	public Project current_project;
+	
+	public Room()
+	{
+		connected_users = new ArrayList<ConnectedUser>();
+	}
 	
 	public void remove_user(String username)
 	{
@@ -24,6 +30,8 @@ public class Room
 			}
 		}
 	}
+	
+	
 	
 	public void add_user(String username, IConnection connection)
 	{

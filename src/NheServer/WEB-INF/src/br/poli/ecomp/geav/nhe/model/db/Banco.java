@@ -1,11 +1,11 @@
 package br.poli.ecomp.geav.nhe.model.db;
 
-import br.poli.ecomp.geav.nhe.model.db.aca.Action;
+import br.poli.ecomp.geav.nhe.model.db.act.Action;
+import br.poli.ecomp.geav.nhe.model.db.atp.ActionType;
 import br.poli.ecomp.geav.nhe.model.db.cmp.Composition;
-import br.poli.ecomp.geav.nhe.model.db.per.Perfil;
+import br.poli.ecomp.geav.nhe.model.db.pfl.Profile;
 import br.poli.ecomp.geav.nhe.model.db.pro.Project;
 import br.poli.ecomp.geav.nhe.model.db.ptc.Participation;
-import br.poli.ecomp.geav.nhe.model.db.tpa.TipoAcao;
 import br.poli.ecomp.geav.nhe.model.db.usr.User;
 
 public class Banco extends Database
@@ -27,10 +27,10 @@ public class Banco extends Database
 	public static final String USUARIO_STR = "Usuario";
 	public static final Class<? extends Table> ACAO = Action.class;
 	public static final Class<? extends Table> COMPOSITION = Composition.class;
-	public static final Class<? extends Table> PROFILE = Perfil.class;
+	public static final Class<? extends Table> PROFILE = Profile.class;
 	public static final Class<? extends Table> PROJECT = Project.class;
 	public static final Class<? extends Table> PARTICIPACAO = Participation.class;
-	public static final Class<? extends Table> TIPOACAO = TipoAcao.class;
+	public static final Class<? extends Table> TIPOACAO = ActionType.class;
 	public static final Class<? extends Table> USUARIO = User.class;
 	private Banco()
 	{

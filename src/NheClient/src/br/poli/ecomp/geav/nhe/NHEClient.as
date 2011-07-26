@@ -5,6 +5,8 @@ package br.poli.ecomp.geav.nhe
 	import br.poli.ecomp.geav.nhe.controller.NHEController;
 	
 	import flash.display.Sprite;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	
 	public class NHEClient extends Sprite
@@ -18,6 +20,9 @@ package br.poli.ecomp.geav.nhe
 		}
 		private function init(e:Event = null):void
 		{
+			stage.align = StageAlign.TOP_LEFT;
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			NResponder.add(NHEController.CREATION_COMPLETE, nhecontroller_creation_complete_event);
 			prn_nhe_controller = new NHEController(this.stage);

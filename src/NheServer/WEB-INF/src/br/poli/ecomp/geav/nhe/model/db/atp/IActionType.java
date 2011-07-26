@@ -1,0 +1,1 @@
+package br.poli.ecomp.geav.nhe.model.db.atp;import br.poli.ecomp.geav.nhe.model.db.ITable;	public interface IActionType extends ITable{	void set_atp_identificador(int value);	void set_atp_nome(String value);	int get_atp_identificador();	String get_atp_nome();}

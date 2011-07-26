@@ -112,6 +112,7 @@ public class DBConnection {
 		callable_statement = connection.prepareCall(sql);
 		
 		Boolean has_result = callable_statement.execute();
+		
 		if(has_result)
 			return resultsetToList(callable_statement.getResultSet());
 		else
