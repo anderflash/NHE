@@ -323,11 +323,11 @@ package br.poli.ecomp.geav.nhe.view.state
 			tf_message.y = localToGlobal(globalPoint).y - tf_message.height;
 			//var globalPoint:Point = localToGlobal(new Point(tf_message.x, tf_message.y));
 			if(tf_message.y < 0)
-				tf_message.y -= globalPoint.y;
+				tf_message.y = 0;
 			if(tf_message.y + tf_message.height > stage.stageHeight)
 				tf_message.y = stage.stageHeight - tf_message.height;
 			if(tf_message.x < 0)
-				tf_message.x -= globalPoint.x;
+				tf_message.x = 0;
 			if(tf_message.x + tf_message.width > stage.stageWidth)
 				tf_message.x = stage.stageWidth - tf_message.width;
 		}

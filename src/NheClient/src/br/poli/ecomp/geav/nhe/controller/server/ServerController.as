@@ -30,13 +30,6 @@ package br.poli.ecomp.geav.nhe.controller.server
 
 	public class ServerController
 	{
-		// Responders name
-		private static const LOGIN_RESPONDER:Number = 0;
-		private static const CREATE_PROJECT_RESPONDER:Number = 1;
-		private static const LOGOUT_RESPONDER:Number = 2;
-		private static const LIST_PROJECTS_RESPONDER:Number = 3;
-		private static const VIEW_PROJECT_RESPONDER:Number = 4;
-		
 		// Events
 		public static const MODEL_UPLOADED:String = "MODEL_UPLOADED";
 		public static const MODEL_NOT_UPLOADED:String = "MODEL_NOT_UPLOADED";
@@ -65,23 +58,98 @@ package br.poli.ecomp.geav.nhe.controller.server
 		
 		private var _pro_logged_user:User;
 		
-		private var pnl_red5_responders:Vector.<Responder>;
+		private var pnl_red5_responders:Dictionary;
 		
+		/*--------------------------------------------
+		 * 				 PUBLIC METHODS
+		 ---------------------------------------------*/
+		/**
+		 * Constructor, you can't instantiate. It's a Singleton <br>
+		 * Use the instance property. 
+		 * 
+		 */
 		public function ServerController()
 		{
 			if(_instance) throw new Error("Singleton on ServerController");
 		}
-		
-		public static function get instance():ServerController
+		/**
+		 * Setup the connection 
+		 * @param host
+		 * 
+		 */
+		public function setup(host:String):void
 		{
-			return _instance;
+			this._pas_host = host;
+			pro_red5_connection = new NetConnection();
+			pro_cumulus_connection = new NetConnection();
+			
+			pnl_red5_responders = new Dictionary();
+			
+			// Populate Responders
+			
+			pnl_red5_responders[ServerDefaults.FUNCTION_LOGIN] 				= new Responder(login_responder_result_handler, login_responder_status_handler);
+			pnl_red5_responders[ServerDefaults.FUNCTION_CREATE_PROJECT] 	= new Responder(create_project_responder_result_handler, create_project_responder_result_handler);
+			pnl_red5_responders[ServerDefaults.FUNCTION_LOGOUT] 			= new Responder(logout_responder_result_handler, logout_responder_status_handler);
+			pnl_red5_responders[ServerDefaults.FUNCTION_LIST_PROJECTS] 		= new Responder(list_projects_responder_result_handler, list_projects_responder_status_handler);
+			pnl_red5_responders[ServerDefaults.FUNCTION_VIEW_PROJECT] 		= new Responder(view_project_responder_result_handler, view_project_responder_status_handler);
+			pnl_red5_responders[ServerDefaults.FUNCTION_LIST_COMPONENTS] 	= new Responder(list_components_responder_result_handler, list_components_responder_status_handler);
+			pnl_red5_responders[ServerDefaults.FUNCTION_ADD_BLOCK] 			= new Responder(add_block_responder_result_handler, add_block_responder_status_handler);
+			pnl_red5_responders[ServerDefaults.FUNCTION_REMOVE_BLOCK] 		= new Responder(remove_block_responder_result_handler, remove_block_responder_status_handler);
+			pnl_red5_responders[ServerDefaults.FUNCTION_MOVE_BLOCK] 		= new Responder(move_block_responder_result_handler, move_block_responder_status_handler);
+			pnl_red5_responders[ServerDefaults.FUNCTION_CONNECT_BLOCKS] 	= new Responder(connect_blocks_responder_result_handler, connect_blocks_responder_status_handler);
+			pnl_red5_responders[ServerDefaults.FUNCTION_DISCONNECT_BLOCKS] 	= new Responder(disconnect_blocks_responder_result_handler, disconnect_blocks_responder_status_handler);
+			
+			
+			registerClassAlias("br.poli.ecomp.geav.nhe.model.server.LoginStatus",LoginStatus);
+			registerClassAlias("br.poli.ecomp.geav.nhe.model.server.ProcedureResponse",ProcedureResponse);
 		}
 		
-		public function view_project(project:Project):void
+		public function connect():void
 		{
-			pro_red5_connection.call(ServerDefaults.FUNCTION_VIEW_PROJECT, pnl_red5_responders[VIEW_PROJECT_RESPONDER],project.pro_identificador);
+			if(!NResponder.has(NetStatusEvent.NET_STATUS))
+				NResponder.addNative(pro_red5_connection, NetStatusEvent.NET_STATUS, red5_connection_status_event);
+			trace(ServerDefaults.RED5_PROTOCOL + "://" + 
+				this.pas_host + ":" + ServerDefaults.RED5_PORT + "/" +
+				ServerDefaults.RED5_APPLICATION);
+			pro_red5_connection.connect(ServerDefaults.RED5_PROTOCOL + "://" + 
+				this.pas_host + ":" + ServerDefaults.RED5_PORT + "/" +
+				ServerDefaults.RED5_APPLICATION);
 		}
 		
+		public function disconnect():void
+		{
+			pro_red5_connection.close();
+		}
+		
+		public function login(user:String, password:String):void
+		{
+			pro_red5_connection.call(ServerDefaults.FUNCTION_LOGIN, pnl_red5_responders[ServerDefaults.FUNCTION_LOGIN], user, password);
+		}
+		
+		public function logout():void
+		{
+			pro_red5_connection.call(ServerDefaults.FUNCTION_LOGOUT, pnl_red5_responders[ServerDefaults.FUNCTION_LOGOUT]);
+		}
+		
+		/**
+		 * Create Project 
+		 * @param title
+		 * @param description
+		 * @param model
+		 * @param participants
+		 * 
+		 */
+		public function createProject(title:String, description:String, model:String, participants:Array):void
+		{
+			pro_red5_connection.call(ServerDefaults.FUNCTION_CREATE_PROJECT, pnl_red5_responders[ServerDefaults.FUNCTION_CREATE_PROJECT], title, description, model, participants, this._pro_logged_user.usr_identificador);
+		}
+				
+		/**
+		 * Upload a zip model to a project 
+		 * @param fileReference
+		 * @param pro_identificador
+		 * 
+		 */
 		public function uploadFile(fileReference:FileReference, pro_identificador:Number):void
 		{
 			if(!NResponder.has(DataEvent.UPLOAD_COMPLETE_DATA))
@@ -104,6 +172,123 @@ package br.poli.ecomp.geav.nhe.controller.server
 			urlRequest.method = URLRequestMethod.POST;
 			fileReference.upload(urlRequest);
 		}
+		
+		
+		
+		public function listProjects():void
+		{
+			pro_red5_connection.call(ServerDefaults.FUNCTION_LIST_PROJECTS, pnl_red5_responders[ServerDefaults.FUNCTION_LIST_PROJECTS]);
+		}
+		
+		/**
+		 * Enter in the project to participate to the model   
+		 * @param project
+		 * 
+		 */
+		public function view_project(project:Project):void
+		{
+			pro_red5_connection.call(ServerDefaults.FUNCTION_VIEW_PROJECT, pnl_red5_responders[ServerDefaults.FUNCTION_VIEW_PROJECT],project.pro_identificador);
+		}
+
+		public function listComponents(pro_identificador:Number):void
+		{
+			pro_red5_connection.call(ServerDefaults.FUNCTION_LIST_COMPONENTS, pnl_red5_responders[ServerDefaults.FUNCTION_LIST_COMPONENTS]);
+		}
+		
+		public function addBlock():void
+		{
+			
+		}
+		
+		public function removeBlock():void
+		{
+			
+		}
+		
+		public function moveBlock():void
+		{
+			
+		}
+		
+		public function connectBlocks():void
+		{
+			
+		}
+		
+		public function banUser():void
+		{
+			
+		}
+		
+		public function finishProject():void
+		{
+			
+		}
+		
+		public function message_send():void
+		{
+			
+		}
+		
+		/*--------------------------------------------
+		* 				 PROPERTIES
+		---------------------------------------------*/
+		
+		public static function get instance():ServerController
+		{
+			return _instance;
+		}
+		
+		public function get prb_connected():Boolean
+		{
+			return _prb_connected;
+		}
+		
+		public function set prb_connected(value:Boolean):void
+		{
+			_prb_connected = value;
+		}
+		
+		public function get fullPath():String
+		{
+			return "http://" + this.pas_host + ":" + ServerDefaults.RED5_HTTP_PORT + "/" + 
+				ServerDefaults.RED5_APPLICATION;
+		}
+		
+		public function get pas_host():String
+		{
+			return _pas_host;
+		}
+		
+		public function get prb_rtmfp_connected():Boolean
+		{
+			return _prb_rtmfp_connected;
+		}
+		
+		/*--------------------------------------------
+		* 				 PRIVATE METHODS
+		---------------------------------------------*/
+		private function red5_connection_status_event(e:NetStatusEvent):void
+		{
+			trace(e.info.code);
+			switch(e.info.code)
+			{
+				case "NetConnection.Connect.Success":
+					this._prb_connected = true;
+					break;
+				case "NetConnection.Connect.Rejected":
+					this._prb_connected = false;
+					break;
+				case "NetConnection.Connect.Closed":
+					this._prb_connected = false;
+					break;
+				case "NetConnection.Connect.Failed":
+					this._prb_connected = false;
+					break;
+			}
+			NResponder.dispatch(CONNECTION_STATUS,[prb_connected]);
+		}
+		
 		private function filereference_upload_complete_event(e:DataEvent):void
 		{
 			trace(e.type);
@@ -136,92 +321,7 @@ package br.poli.ecomp.geav.nhe.controller.server
 			NResponder.dispatch(MODEL_NOT_UPLOADED);
 		}
 		
-		public function createProject(title:String, description:String, model:String, participants:Array):void
-		{
-			pro_red5_connection.call(ServerDefaults.FUNCTION_CREATE_PROJECT, pnl_red5_responders[CREATE_PROJECT_RESPONDER], title, description, model, participants, this._pro_logged_user.usr_identificador);
-		}
 		
-		public function setup(host:String):void
-		{
-			this._pas_host = host;
-			pro_red5_connection = new NetConnection();
-			pro_cumulus_connection = new NetConnection();
-			
-			pnl_red5_responders = new Vector.<Responder>();
-			
-			// Populate Responders
-			pnl_red5_responders.push(new Responder(login_responder_result_handler, login_responder_status_handler));
-			pnl_red5_responders.push(new Responder(create_project_responder_result_handler, create_project_responder_result_handler));
-			pnl_red5_responders.push(new Responder(logout_responder_result_handler, logout_responder_status_handler));
-			pnl_red5_responders.push(new Responder(list_projects_responder_result_handler, list_projects_responder_status_handler));
-			pnl_red5_responders.push(new Responder(view_project_responder_result_handler, view_project_responder_status_handler));
-			
-			registerClassAlias("br.poli.ecomp.geav.nhe.model.server.LoginStatus",LoginStatus);
-			registerClassAlias("br.poli.ecomp.geav.nhe.model.server.ProcedureResponse",ProcedureResponse);
-		}
-		
-		public function connect():void
-		{
-			if(!NResponder.has(NetStatusEvent.NET_STATUS))
-				NResponder.addNative(pro_red5_connection, NetStatusEvent.NET_STATUS, red5_connection_status_event);
-			trace(ServerDefaults.RED5_PROTOCOL + "://" + 
-				this.pas_host + ":" + ServerDefaults.RED5_PORT + "/" +
-				ServerDefaults.RED5_APPLICATION);
-			pro_red5_connection.connect(ServerDefaults.RED5_PROTOCOL + "://" + 
-										this.pas_host + ":" + ServerDefaults.RED5_PORT + "/" +
-										ServerDefaults.RED5_APPLICATION);
-		}
-		
-		public function red5_connection_status_event(e:NetStatusEvent):void
-		{
-			trace(e.info.code);
-			switch(e.info.code)
-			{
-				case "NetConnection.Connect.Success":
-					this._prb_connected = true;
-					break;
-				case "NetConnection.Connect.Rejected":
-					this._prb_connected = false;
-					break;
-				case "NetConnection.Connect.Closed":
-					this._prb_connected = false;
-					break;
-				case "NetConnection.Connect.Failed":
-					this._prb_connected = false;
-					break;
-			}
-			NResponder.dispatch(CONNECTION_STATUS,[prb_connected]);
-		}
-		
-		public function disconnect():void
-		{
-			pro_red5_connection.close();
-		}
-		
-		public function login(user:String, password:String):void
-		{
-			pro_red5_connection.call(ServerDefaults.FUNCTION_LOGIN, pnl_red5_responders[LOGIN_RESPONDER], user, password);
-		}
-		
-		public function logout():void
-		{
-			pro_red5_connection.call(ServerDefaults.FUNCTION_LOGOUT, pnl_red5_responders[LOGOUT_RESPONDER]);
-		}
-		
-		public function listProjects():void
-		{
-			pro_red5_connection.call(ServerDefaults.FUNCTION_LIST_PROJECTS, pnl_red5_responders[LIST_PROJECTS_RESPONDER]);
-		}
-		
-		public function get prb_connected():Boolean
-		{
-			return _prb_connected;
-		}
-
-		public function set prb_connected(value:Boolean):void
-		{
-			_prb_connected = value;
-		}
 		
 		private function login_responder_result_handler(object:*):void
 		{
@@ -317,6 +417,66 @@ package br.poli.ecomp.geav.nhe.controller.server
 			
 		}
 		
+		private function list_components_responder_result_handler(object:*):void
+		{
+			
+		}
+		
+		private function list_components_responder_status_handler(object:*):void
+		{
+			
+		}
+		
+		private function add_block_responder_result_handler(object:*):void
+		{
+			
+		}
+		
+		private function remove_block_responder_result_handler(object:*):void
+		{
+			
+		}
+		
+		private function move_block_responder_result_handler(object:*):void
+		{
+			
+		}
+		
+		private function connect_blocks_responder_result_handler(object:*):void
+		{
+			
+		}
+		
+		private function disconnect_blocks_responder_result_handler(object:*):void
+		{
+			
+		}
+		
+		private function add_block_responder_status_handler(object:*):void
+		{
+			
+		}
+		
+		private function remove_block_responder_status_handler(object:*):void
+		{
+			
+		}
+		
+		private function move_block_responder_status_handler(object:*):void
+		{
+			
+		}
+		
+		private function connect_blocks_responder_status_handler(object:*):void
+		{
+			
+		}
+		
+		private function disconnect_blocks_responder_status_handler(object:*):void
+		{
+			
+		}
+		
 		private function cumulus_connection_status_event(e:NetStatusEvent):void
 		{
 			trace("Cumulus: " + e.info.code);
@@ -352,24 +512,6 @@ package br.poli.ecomp.geav.nhe.controller.server
 			
 		}
 		
-		public function get fullPath():String
-		{
-			return "http://" + this.pas_host + ":" + ServerDefaults.RED5_HTTP_PORT + "/" + 
-				ServerDefaults.RED5_APPLICATION;
-		}
-		
-		
-
-		public function get pas_host():String
-		{
-			return _pas_host;
-		}
-
-		public function get prb_rtmfp_connected():Boolean
-		{
-			return _prb_rtmfp_connected;
-		}
-		
-		
+				
 	}
 }
