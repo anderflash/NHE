@@ -24,7 +24,11 @@ package br.poli.ecomp.geav.nhe.controller.augmentedreality
 	
 	import ru.inspirit.asfeat.ASFEAT;
 	import ru.inspirit.asfeat.event.ASFEATCalibrationEvent;
+<<<<<<< HEAD
 	import ru.inspirit.asfeat.event.ASFEATDetectionEvent;
+=======
+	import ru.inspirit.asfeat.event.ASFEATDetectionEvent;
+>>>>>>> cd6d26b2dcc6e982fdf89a2d86f833a167a182d8
 	
 	public class ARController implements IController
 	{

@@ -1,5 +1,6 @@
 package br.poli.ecomp.geav.nhe.view.augmentedreality
 {
+<<<<<<< HEAD
 	import appkit.responders.NResponder;
 	
 	import flash.display.Stage;
@@ -7,6 +8,15 @@ package br.poli.ecomp.geav.nhe.view.augmentedreality
 	
 	import ru.inspirit.asfeat.ASFEAT;
 
+=======
+	import appkit.responders.NResponder;
+	
+	import flash.display.Stage;
+	import flash.events.Event;
+	
+	import ru.inspirit.asfeat.ASFEAT;
+
+>>>>>>> cd6d26b2dcc6e982fdf89a2d86f833a167a182d8
 	public class ARDetector
 	{
 		private var _pao_ar_view:ARView;
