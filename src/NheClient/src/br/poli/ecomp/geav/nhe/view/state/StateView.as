@@ -11,11 +11,7 @@ package br.poli.ecomp.geav.nhe.view.state
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.text.TextField;
-<<<<<<< HEAD
 	import flash.text.TextFieldAutoSize;
-=======
-	import flash.text.TextFieldAutoSize;
->>>>>>> cd6d26b2dcc6e982fdf89a2d86f833a167a182d8
 	
 	public class StateView extends Sprite implements ITooltipavel
 	{

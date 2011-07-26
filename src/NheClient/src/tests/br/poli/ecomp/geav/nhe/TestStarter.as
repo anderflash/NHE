@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package tests.br.poli.ecomp.geav.nhe
 {
 	import asunit.core.TextCore;
@@ -16,23 +15,5 @@ package tests.br.poli.ecomp.geav.nhe
 			core.start(AllTests, null, this);
 		}
 	}
-=======
-package tests.br.poli.ecomp.geav.nhe
-{
-	import asunit.core.TextCore;
-	
-	import flash.display.Sprite;
-	
-	public class TestStarter extends Sprite
-	{
-		private var core:TextCore;
-		
-		public function TestStarter()
-		{
-			super();
-			core = new TextCore();
-			core.start(AllTests, null, this);
-		}
-	}
->>>>>>> cd6d26b2dcc6e982fdf89a2d86f833a167a182d8
+
 }

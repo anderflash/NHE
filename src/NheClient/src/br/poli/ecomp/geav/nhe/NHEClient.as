@@ -7,11 +7,7 @@ package br.poli.ecomp.geav.nhe
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
-<<<<<<< HEAD
 	import flash.events.Event;
-=======
-	import flash.events.Event;
->>>>>>> cd6d26b2dcc6e982fdf89a2d86f833a167a182d8
 	
 	public class NHEClient extends Sprite
 	{

@@ -24,11 +24,7 @@ package br.poli.ecomp.geav.nhe.view.world
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	
-<<<<<<< HEAD
 	import ru.inspirit.asfeat.calibration.IntrinsicParameters;
-=======
-	import ru.inspirit.asfeat.calibration.IntrinsicParameters;
->>>>>>> cd6d26b2dcc6e982fdf89a2d86f833a167a182d8
 	
 	public class WorldView extends Sprite
 	{
