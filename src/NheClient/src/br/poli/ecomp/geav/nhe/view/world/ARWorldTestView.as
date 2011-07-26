@@ -186,9 +186,11 @@ package br.poli.ecomp.geav.nhe.view.world
 			var bitmapMaterial:BitmapMaterial = new BitmapMaterial(textoBitmap);
 			bitmapMaterial.ambientColor = 0x080820;
 			bitmapMaterial.diffuseMethod.alphaThreshold = .25;
-			bitmapMaterial.transparent = true;
+			
+			//bitmapMaterial.transparent = true;
 			balao.material = bitmapMaterial;
-			menuEsquerda.addChild(balao);
+			if(balao.parent != menuEsquerda)
+				menuEsquerda.addChild(balao);
 		}
 		private function hideBalao():void
 		{
