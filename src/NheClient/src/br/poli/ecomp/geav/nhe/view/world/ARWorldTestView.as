@@ -1,4 +1,3 @@
-
 package br.poli.ecomp.geav.nhe.view.world
 {
 	import away3d.cameras.Camera3D;
@@ -48,20 +47,28 @@ package br.poli.ecomp.geav.nhe.view.world
 		
 		private var balao:Plane;
 		
+		private var workspace:WorkView;
+		
 		[SWF(frameRate = "60")]
 		public function ARWorldTestView()
 		{
 			super();
 			
 			createView();
-			createMenu();
+			createWorkspace();
+			addEventListener(Event.ENTER_FRAME, enterFrameEvent);
 		}
 		private function createView():void
 		{
 			view = new View3D();
 			view.antiAlias = 4;
+			view.width = stage.stageWidth;
+			view.height = stage.stageHeight;
 			addChild(view);
 			
+			pointLight = new DirectionalLight();
+			pointLight.color = 0xffeeaa;
+			view.scene.addChild(pointLight);
 			
 			/*createBalao();
 			view = new View3D();
@@ -119,19 +126,21 @@ package br.poli.ecomp.geav.nhe.view.world
 			addEventListener(Event.ENTER_FRAME, enterFrameEvent);*/
 		}
 		
-		private function createMenu():void
+		private function createWorkspace():void
 		{
-			
+			workspace = new WorkView();
+			view.scene.addChild(workspace);
 		}
+		
 		private function enterFrameEvent(e:Event):void
 		{
-			menuEsquerda.rotationY += 1;
-			balao.rotationY = -menuEsquerda.rotationY;
+			//menuEsquerda.rotationY += 1;
+			//balao.rotationY = -menuEsquerda.rotationY;
 			if(view.stage)
 				view.render();
 		}
 		
-		private function coneMouseOverEvent(e:Event):void
+		/*private function coneMouseOverEvent(e:Event):void
 		{
 			trace("coneMouseOverEvent");
 			placeBalao(e.currentTarget as Object3D);
@@ -140,14 +149,14 @@ package br.poli.ecomp.geav.nhe.view.world
 		{
 			trace("coneMouseOutEvent");
 			hideBalao();
-		}
+		}*/
 		private function createBalao():void
 		{
 			balao = new Plane(null,200,100,20,20);
 			
 		}
 		
-		private function placeBalao(objeto:Object3D):void
+		/*private function placeBalao(objeto:Object3D):void
 		{
 			balao.x = objeto.x;
 			var altura:Number = 0;
@@ -207,6 +216,6 @@ package br.poli.ecomp.geav.nhe.view.world
 		{
 			if(balao.parent)
 				balao.parent.removeChild(balao);
-		}
+		}*/
 	}
 }

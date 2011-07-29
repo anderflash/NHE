@@ -7,19 +7,19 @@ package br.poli.ecomp.geav.nhe.view.world
 	
 	import br.poli.ecomp.geav.nhe.view.gui.AboutView;
 	
-	public class GeneratorView extends ObjectContainer3D
+	public class GeneratorView extends ModelView
 	{
 		private var cube:Cube;
 		
-		public function GeneratorView(material:MaterialBase)
+		public function GeneratorView()
 		{
 			super();
-			createShape(material);
+			createShape();
 		}
 		
-		private function createShape(material):void
+		private function createShape():void
 		{
-			cube = new Cube(material);
+			cube = new Cube();
 			addChild(cube);
 		}
 		
@@ -31,7 +31,7 @@ package br.poli.ecomp.geav.nhe.view.world
 		
 		private function duplicate():GeneratorView
 		{
-			var generatorview:GeneratorView = new Generator();
+			var generatorview:GeneratorView = new GeneratorView();
 			generatorview.cube = new Cube(
 									new ColorMaterial(ColorMaterial(cube.material).color),
 									cube.width, 

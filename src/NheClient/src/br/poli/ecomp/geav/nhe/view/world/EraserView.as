@@ -4,16 +4,16 @@ package br.poli.ecomp.geav.nhe.view.world
 	import away3d.materials.MaterialBase;
 	import away3d.primitives.Cube;
 	
-	public class EraserView extends ObjectContainer3D
+	public class EraserView extends ModelView
 	{
 		private var cubeRed:Cube;
 		private var cubeBlue:Cube;
 		
-		public function EraserView(material:MaterialBase)
+		public function EraserView()
 		{
 			super();
-			cubeRed = new Cube(material);
-			cubeBlue= new Cube(material);
+			cubeRed = new Cube();
+			cubeBlue= new Cube();
 			addChild(cubeRed);
 			addChild(cubeBlue);
 		}

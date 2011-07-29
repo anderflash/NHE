@@ -215,10 +215,7 @@ package br.poli.ecomp.geav.nhe.view.world
 					video.scaleX = -1;
 					
 					BitmapMaterial(prl_planes_3d[i].material).bitmapData.draw(video,transformacao);
-<<<<<<< HEAD
-=======
 					//BitmapMaterial(prl_planes_3d[i].material).scaleU = -1;
->>>>>>> 532017378d49ada307dc0b34b60d77989a77631e
 					prl_planes_3d[i].subMeshes[0].scaleU = -1;
 					BitmapMaterial(prl_planes_3d[i].material).repeat = true;
 					bitmapOld.dispose();
