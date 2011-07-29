@@ -15,4 +15,5 @@ package tests.br.poli.ecomp.geav.nhe
 			core.start(AllTests, null, this);
 		}
 	}
+
 }

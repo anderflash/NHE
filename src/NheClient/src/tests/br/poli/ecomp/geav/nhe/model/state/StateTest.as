@@ -14,7 +14,7 @@ package tests.br.poli.ecomp.geav.nhe.model.state
 	import br.poli.ecomp.geav.nhe.model.db.act.Action;
 	import br.poli.ecomp.geav.nhe.model.errors.StateError;
 	import br.poli.ecomp.geav.nhe.model.state.State;
-
+	
 	public class StateTest
 	{
 		[Inject]

@@ -218,7 +218,5 @@ package br.poli.ecomp.geav.nhe.view.state
 		{
 			return _pro_old_state;
 		}
-
-
 	}
 }

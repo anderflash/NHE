@@ -91,7 +91,6 @@ package br.poli.ecomp.geav.nhe.controller.state
 		{
 			return _pao_world_controller;
 		}
-
 		public function set pao_world_controller(value:WorldController):void
 		{
 			_pao_world_controller = value;
