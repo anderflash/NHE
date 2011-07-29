@@ -19,7 +19,8 @@ package br.poli.ecomp.geav.nhe.view.world
 		
 		private function createShape(material):void
 		{
-			cube = new Cube();
+			cube = new Cube(material);
+			addChild(cube);
 		}
 		
 		private function changeColor(color:uint):void

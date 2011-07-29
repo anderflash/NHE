@@ -52,25 +52,31 @@ package br.poli.ecomp.geav.nhe.view.world
 		public function ARWorldTestView()
 		{
 			super();
-			createBalao();
+			
+			createView();
+			createMenu();
+		}
+		private function createView():void
+		{
+			view = new View3D();
+			view.antiAlias = 4;
+			addChild(view);
+			
+			
+			/*createBalao();
 			view = new View3D();
 			view.antiAlias = 4;
 			addChild(view);			
 			
 			var colorMaterial:ColorMaterial = new ColorMaterial(0xff0000);
 			
-			
-			
 			cube = new Cube(colorMaterial,100,100,100,11,7,25,false);
 			sphere = new Sphere(colorMaterial);
 			cone = new Cone(colorMaterial,50,50);
 			cube.z = sphere.radius + spaceBetweenPrimitives + cube.depth/2;
-			cone.z = -sphere.radius - spaceBetweenPrimitives - cone.radius;
+			cone.z = -sphere.radius - spaceBetweenPrimitives - cone.radius;*/
 			
-			pointLight = new DirectionalLight();
-			/*pointLight.x = 0;
-			pointLight.y = 1000;
-			pointLight.z = 0;*/
+			/*pointLight = new DirectionalLight();
 			pointLight.color = 0xffeeaa;
 			
 			colorMaterial.lights = [pointLight];
@@ -110,7 +116,12 @@ package br.poli.ecomp.geav.nhe.view.world
 			view.width = stage.stageWidth;
 			view.height = stage.stageHeight;
 
-			addEventListener(Event.ENTER_FRAME, enterFrameEvent);
+			addEventListener(Event.ENTER_FRAME, enterFrameEvent);*/
+		}
+		
+		private function createMenu():void
+		{
+			
 		}
 		private function enterFrameEvent(e:Event):void
 		{

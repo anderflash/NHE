@@ -1,26 +1,21 @@
-<<<<<<< HEAD
 package br.poli.ecomp.geav.nhe.view.world
 {
 	import away3d.containers.ObjectContainer3D;
+	import away3d.materials.MaterialBase;
+	import away3d.primitives.Cube;
 	
 	public class EraserView extends ObjectContainer3D
 	{
-		public function EraserView()
+		private var cubeRed:Cube;
+		private var cubeBlue:Cube;
+		
+		public function EraserView(material:MaterialBase)
 		{
 			super();
+			cubeRed = new Cube(material);
+			cubeBlue= new Cube(material);
+			addChild(cubeRed);
+			addChild(cubeBlue);
 		}
 	}
-=======
-package br.poli.ecomp.geav.nhe.view.world
-{
-	import away3d.containers.ObjectContainer3D;
-	
-	public class EraserView extends ObjectContainer3D
-	{
-		public function EraserView()
-		{
-			super();
-		}
-	}
->>>>>>> cd6d26b2dcc6e982fdf89a2d86f833a167a182d8
 }
