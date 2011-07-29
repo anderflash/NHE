@@ -142,6 +142,16 @@ package br.poli.ecomp.geav.nhe.model.server
 		public static const FUNCTION_LIST_PROJECTS:String = "listProjects";
 		
 		public static const FUNCTION_VIEW_PROJECT:String = "viewProject";
+
+		public static const FUNCTION_LIST_COMPONENTS:String = "listComponents";
+		public static const FUNCTION_ADD_BLOCK:String = "addBlock";
+		public static const FUNCTION_REMOVE_BLOCK:String = "removeBlock";
+		public static const FUNCTION_MOVE_BLOCK:String = "moveBlock";
+		public static const FUNCTION_CONNECT_BLOCKS:String = "connectBlocks";
+		public static const FUNCTION_DISCONNECT_BLOCKS:String = "disconnectBlocks";
+		
+
+		
 			
 		public function ServerDefaults()
 		{

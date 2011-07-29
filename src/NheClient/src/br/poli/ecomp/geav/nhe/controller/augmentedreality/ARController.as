@@ -192,7 +192,8 @@ package br.poli.ecomp.geav.nhe.controller.augmentedreality
 			}
 			_cambuff = new BitmapData( w, h, false, 0x0 );
 			_cam = Camera.getCamera(camName);
-			_cam.setMode( w, h, fps, true );
+			if(_cam)
+				_cam.setMode( w, h, fps, true );
 		}
 		protected function onModelDetected(e:ASFEATDetectionEvent):void
 		{/*

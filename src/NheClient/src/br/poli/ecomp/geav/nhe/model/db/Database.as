@@ -1,7 +1,5 @@
 package br.poli.ecomp.geav.nhe.model.db
 {
-	import marcozero.marzsdk.net.db.MZDatabase;
-	
 	import br.poli.ecomp.geav.nhe.model.db.act.Action;
 	import br.poli.ecomp.geav.nhe.model.db.atp.ActionType;
 	import br.poli.ecomp.geav.nhe.model.db.cmp.Composition;
@@ -9,6 +7,8 @@ package br.poli.ecomp.geav.nhe.model.db
 	import br.poli.ecomp.geav.nhe.model.db.pro.Project;
 	import br.poli.ecomp.geav.nhe.model.db.ptc.Participation;
 	import br.poli.ecomp.geav.nhe.model.db.usr.User;
+	
+	import marcozero.marzsdk.net.db.MZDatabase;
 	
 	public class Database extends MZDatabase
 	{
@@ -34,8 +34,6 @@ package br.poli.ecomp.geav.nhe.model.db
 		public static const ACTIONTYPE:Class = ActionType;
 		public static const USER:Class = User;
 		
-		private static const _instance:Database = new Database();
-		
 		public function Database()
 		{
 			super();
@@ -52,7 +50,7 @@ package br.poli.ecomp.geav.nhe.model.db
 		
 		public static function get instance():Database
 		{
-			return _instance as Database;
+			return MZDatabase._instance as Database;
 		}
 	}
 }

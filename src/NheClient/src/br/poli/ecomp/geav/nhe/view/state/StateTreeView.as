@@ -154,7 +154,7 @@ package br.poli.ecomp.geav.nhe.view.state
 		{
 			mask_sprite = new Sprite();
 			mask_sprite.graphics.beginFill(0xffffff);
-			mask_sprite.graphics.drawRoundRect(0,0,_view_width-1,_view_height-1,20,20);
+			mask_sprite.graphics.drawRoundRect(1,1,_view_width-1,_view_height-1,20,20);
 			mask_sprite.graphics.endFill();
 		}
 		

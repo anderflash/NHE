@@ -202,7 +202,12 @@ package br.poli.ecomp.geav.nhe.view.world
 			{
 				if(prl_view_3d[i].parent)
 				{
-					var bitmapOld:BitmapData = BitmapMaterial(prl_planes_3d[i].material).bitmapData;
+					var bitmapOld:BitmapData;
+					trace(prl_planes_3d);
+					trace(prl_planes_3d[i]);
+					
+					if(prl_planes_3d[i].material)
+						bitmapOld = BitmapMaterial(prl_planes_3d[i].material).bitmapData;
 					
 					var bitmapData:BitmapData = new BitmapData(1024,1024);
 					BitmapMaterial(prl_planes_3d[i].material).bitmapData = bitmapData;
@@ -210,7 +215,7 @@ package br.poli.ecomp.geav.nhe.view.world
 					video.scaleX = -1;
 					
 					BitmapMaterial(prl_planes_3d[i].material).bitmapData.draw(video,transformacao);
-					BitmapMaterial(prl_planes_3d[i].material).scaleU = -1;
+					prl_planes_3d[i].subMeshes[0].scaleU = -1;
 					BitmapMaterial(prl_planes_3d[i].material).repeat = true;
 					bitmapOld.dispose();
 					prl_planes_3d[i].material = material;
@@ -250,11 +255,13 @@ package br.poli.ecomp.geav.nhe.view.world
 		{
 			
 		}
+		
 		private function worldview_added_stage(e:Event):void
 		{
 			if(stage)
 				updateViewPositions();
 		}
+		
 		private function ajeitarFundo():void
 		{
 			sprite.x = 0;
