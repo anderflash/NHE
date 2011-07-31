@@ -3,6 +3,7 @@
 	<name>NHEClient</name>
 	<comment></comment>
 	<projects>
+		<project>Away3D</project>
 		<project>MarzSDK</project>
 	</projects>
 	<buildSpec>

@@ -62,7 +62,7 @@ package br.poli.ecomp.geav.nhe.view.world
 			{
 				prl_scene_3d.push(new Scene3D());
 				prl_camera_3d.push(new ARAway3DCamera(intrinsic));
-				prl_view_3d.push(new View3D(prl_scene_3d[i], prl_camera_3d[i]));
+				prl_view_3d.push(new View3D());//prl_scene_3d[i], prl_camera_3d[i]));
 				prl_view_3d[i].width = 640;
 				prl_view_3d[i].height = 480;
 			}
@@ -74,7 +74,7 @@ package br.poli.ecomp.geav.nhe.view.world
 			video = new Video(640,480);
 			video.attachCamera(webcam);
 			video.scaleX = -1;
-			if(webcam)
+			/*if(webcam)
 			{
 				prl_planes_3d = new Vector.<Plane>();
 				for(i = 0; i < prn_num_views; i++)
@@ -92,9 +92,9 @@ package br.poli.ecomp.geav.nhe.view.world
 					 material.repeat = true;
 					 prl_planes_3d[i].material = material;
 
-					 prl_scene_3d[i].addChild(prl_planes_3d[i]);
+					 //prl_scene_3d[i].addChild(prl_planes_3d[i]);
 				}
-			}
+			}*/
 			addEventListener(Event.ADDED_TO_STAGE, added_to_stage_event);
 			
 		}
@@ -202,24 +202,31 @@ package br.poli.ecomp.geav.nhe.view.world
 			{
 				if(prl_view_3d[i].parent)
 				{
+					
 					var bitmapOld:BitmapData;
-					trace(prl_planes_3d);
-					trace(prl_planes_3d[i]);
+					//trace(prl_planes_3d);
+					//trace(prl_planes_3d[i]);
 					
-					if(prl_planes_3d[i].material)
-						bitmapOld = BitmapMaterial(prl_planes_3d[i].material).bitmapData;
+					//if(prl_planes_3d[i].material)
+					//	bitmapOld = BitmapMaterial(prl_planes_3d[i].material).bitmapData;
 					
-					var bitmapData:BitmapData = new BitmapData(1024,1024);
-					BitmapMaterial(prl_planes_3d[i].material).bitmapData = bitmapData;
 					
-					video.scaleX = -1;
+					var _bg:BitmapData;
+					_bg = new BitmapData(500, 300, false, 0);
+					_bg.perlinNoise(50, 50, 8, 5, true, true, 7, true);
 					
-					BitmapMaterial(prl_planes_3d[i].material).bitmapData.draw(video,transformacao);
+					var bitmapData:BitmapData = new BitmapData(640,480);
+					prl_view_3d[i].backgroundImage = _bg;
+					//BitmapMaterial(prl_planes_3d[i].material).bitmapData = bitmapData;
+					
+					//video.scaleX = -1;
+					
+					bitmapData.draw(video);
 					//BitmapMaterial(prl_planes_3d[i].material).scaleU = -1;
-					prl_planes_3d[i].subMeshes[0].scaleU = -1;
-					BitmapMaterial(prl_planes_3d[i].material).repeat = true;
-					bitmapOld.dispose();
-					prl_planes_3d[i].material = material;
+					//prl_planes_3d[i].subMeshes[0].scaleU = -1;
+					//BitmapMaterial(prl_planes_3d[i].material).repeat = true;
+					//bitmapOld.dispose();
+					//prl_planes_3d[i].material = material;
 					
 					prl_view_3d[i].render();
 				}
@@ -286,7 +293,7 @@ package br.poli.ecomp.geav.nhe.view.world
 			sprite.alpha = 0;
 			sprite.mouseChildren = false;
 			sprite.mouseEnabled = false;
-			addChildAt(sprite,0);
+			//addChildAt(sprite,0);
 			NResponder.dispatch(WORLD_SIZE_MODIFIED);
 		}
 

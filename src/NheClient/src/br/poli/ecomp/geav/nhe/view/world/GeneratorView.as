@@ -15,6 +15,7 @@ package br.poli.ecomp.geav.nhe.view.world
 		{
 			super();
 			createShape();
+			changeColor(0xff0000);
 		}
 		
 		private function createShape():void
@@ -42,6 +43,11 @@ package br.poli.ecomp.geav.nhe.view.world
 									cube.segmentsD, 
 									cube.tile6);
 			return generatorview;
+		}
+		
+		override public function set lights(value:Array):void
+		{
+			cube.material.lights = value;
 		}
 	}
 }

@@ -34,6 +34,8 @@ package br.poli.ecomp.geav.nhe.model.db
 		public static const ACTIONTYPE:Class = ActionType;
 		public static const USER:Class = User;
 		
+		private static var _instance:Database = new Database();
+		
 		public function Database()
 		{
 			super();
@@ -50,7 +52,7 @@ package br.poli.ecomp.geav.nhe.model.db
 		
 		public static function get instance():Database
 		{
-			return MZDatabase._instance as Database;
+			return _instance;
 		}
 	}
 }

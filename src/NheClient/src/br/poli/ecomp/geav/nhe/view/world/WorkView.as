@@ -21,19 +21,23 @@ package br.poli.ecomp.geav.nhe.view.world
 		
 		private function createMenus():void
 		{
-			options = new Vector.<ModelView>([new GeneratorView(),
-				new ProcessorView(),
-				new ConsumerView(),
-				new RouterView(),
-				new EraserView(),
-				new ConnectView()
-			]);
+			
+			options = new Vector.<ModelView>();
+			options.push(new GeneratorView());
+			options.push(new ProcessorView());
+			options.push(new ConsumerView());
+			options.push(new RouterView());
+			options.push(new EraserView());
+			options.push(new ConnectView());
+			
 			menuLeft = new MenuView(options.slice(0,3));
 			menuRight = new MenuView(options.slice(3,6));
 			addChild(menuLeft);
 			addChild(menuRight);
-			menuLeft.x = 0;
-			menuRight.x = 500;
+			menuLeft.x = -250;
+			menuRight.x = 250;
+			menuLeft.arrangeOptions();
+			menuRight.arrangeOptions();
 		}
 		
 		private function addModule():void
@@ -44,6 +48,12 @@ package br.poli.ecomp.geav.nhe.view.world
 		private function removeModule():void
 		{
 			
+		}
+		
+		public function set lights(value:Array):void
+		{
+			menuLeft.lights = value;
+			menuRight.lights = value;
 		}
 	}
 }

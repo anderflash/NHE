@@ -6,5 +6,7 @@ package br.poli.ecomp.geav.nhe.view.world
 		{
 			super();
 		}
+		
+		
 	}
 }

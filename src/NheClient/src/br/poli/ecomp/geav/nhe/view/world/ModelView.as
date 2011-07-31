@@ -20,6 +20,11 @@ package br.poli.ecomp.geav.nhe.view.world
 		{
 			_pao_shape = value;
 		}
+		
+		public function set lights(value:Array):void
+		{
+			// Must be overriden
+		}
 
 	}
 }
