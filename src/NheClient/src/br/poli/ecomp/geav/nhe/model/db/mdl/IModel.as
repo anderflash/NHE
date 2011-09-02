@@ -1,0 +1,1 @@
+package br.poli.ecomp.geav.nhe.model.db.mdl{	import marcozero.marzsdk.net.db.IMZTable;	public interface IModel extends IMZTable	{		function set mdl_identificador(value:Number):void;		function get mdl_identificador():Number;	}}

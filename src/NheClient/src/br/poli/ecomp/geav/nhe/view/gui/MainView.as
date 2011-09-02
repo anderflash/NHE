@@ -3,6 +3,8 @@ package br.poli.ecomp.geav.nhe.view.gui
 	import appkit.responders.NResponder;
 	
 	import br.poli.ecomp.geav.nhe.model.db.Database;
+	import br.poli.ecomp.geav.nhe.model.db.act.Action;
+	import br.poli.ecomp.geav.nhe.model.db.cpl.Couple;
 	import br.poli.ecomp.geav.nhe.model.db.pro.Project;
 	
 	import flash.events.MouseEvent;
@@ -81,10 +83,19 @@ package br.poli.ecomp.geav.nhe.view.gui
 				projeto.pro_identificador = projects[i][0];
 				projeto.pro_title = projects[i][1];
 				projeto.pro_description = projects[i][2];
-				projeto.pro_primitive = projects[i][3];
-				projeto.pro_finished = projects[i][4];
-				projeto.act_identificador = projects[i][5];
-				projeto.pro_model_path = projects[i][6];
+				projeto.pro_finished = projects[i][3];
+				if(projects[i][4])
+				{
+					projeto.act_identificador = new Action();
+					projeto.act_identificador.act_identificador = projects[i][4];
+				}
+				projeto.pro_model_path = projects[i][5];
+				if(projects[i][6])
+				{
+					projeto.cpl_identificador = new Couple();
+					projeto.cpl_identificador.cpl_identificador = projects[i][6];
+										
+				}
 				vct_projects.append(projeto);
 			}
 		}
