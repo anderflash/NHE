@@ -329,14 +329,21 @@ package br.poli.ecomp.geav.nhe.controller.server
 			{
 				var login_status:LoginStatus = LoginStatus(object);
 				this._prb_logged = login_status.pab_logged;
-				if(login_status.pao_user.data.length > 0)
+				if(login_status.pao_user)
 				{
-					this._pro_logged_user = new User();
-					this._pro_logged_user.usr_identificador = Number(login_status.pao_user.get(0,"usr_identificador"));
-					this._pro_logged_user.usr_name = String(login_status.pao_user.get(0,"usr_name"));
-					this._pro_logged_user.usr_login = String(login_status.pao_user.get(0,"usr_login"));
-					this._pro_logged_user.usr_senha = String(login_status.pao_user.get(0,"usr_password"));
-					this._pro_logged_user.usr_email = String(login_status.pao_user.get(0,"usr_email"));
+					if(login_status.pao_user.data.length > 0)
+					{
+						this._pro_logged_user = new User();
+						this._pro_logged_user.usr_identificador = Number(login_status.pao_user.get(0,"usr_identificador"));
+						this._pro_logged_user.usr_name = String(login_status.pao_user.get(0,"usr_name"));
+						this._pro_logged_user.usr_login = String(login_status.pao_user.get(0,"usr_login"));
+						this._pro_logged_user.usr_password = String(login_status.pao_user.get(0,"usr_password"));
+						this._pro_logged_user.usr_email = String(login_status.pao_user.get(0,"usr_email"));
+					}
+				}
+				else
+				{
+					this._prb_logged = false;
 				}
 			}
 			else

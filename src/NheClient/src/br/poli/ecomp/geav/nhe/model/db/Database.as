@@ -65,7 +65,7 @@ package br.poli.ecomp.geav.nhe.model.db
 		public static const USER:Class = User;
 
 		
-		private static var _instance:Database = new Database();
+		protected static var _instance:Database = new Database();
 		
 		public function Database()
 		{

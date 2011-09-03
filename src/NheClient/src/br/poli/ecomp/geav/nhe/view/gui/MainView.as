@@ -2,9 +2,8 @@ package br.poli.ecomp.geav.nhe.view.gui
 {
 	import appkit.responders.NResponder;
 	
-	import br.poli.ecomp.geav.nhe.model.db.Database;
 	import br.poli.ecomp.geav.nhe.model.db.act.Action;
-	import br.poli.ecomp.geav.nhe.model.db.cpl.Couple;
+	import br.poli.ecomp.geav.nhe.model.db.cpl.Coupled;
 	import br.poli.ecomp.geav.nhe.model.db.pro.Project;
 	
 	import flash.events.MouseEvent;
@@ -13,11 +12,9 @@ package br.poli.ecomp.geav.nhe.view.gui
 	import org.aswing.JButton;
 	import org.aswing.JFrame;
 	import org.aswing.JList;
-	import org.aswing.JMenu;
 	import org.aswing.JToolBar;
 	import org.aswing.SoftBoxLayout;
 	import org.aswing.VectorListModel;
-	import org.aswing.event.InteractiveEvent;
 	import org.aswing.event.ListItemEvent;
 	
 	public class MainView extends JFrame
@@ -92,9 +89,8 @@ package br.poli.ecomp.geav.nhe.view.gui
 				projeto.pro_model_path = projects[i][5];
 				if(projects[i][6])
 				{
-					projeto.cpl_identificador = new Couple();
+					projeto.cpl_identificador = new Coupled();
 					projeto.cpl_identificador.cpl_identificador = projects[i][6];
-										
 				}
 				vct_projects.append(projeto);
 			}

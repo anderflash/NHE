@@ -6,8 +6,9 @@ package br.poli.ecomp.geav.nhe.view.gui
 	import br.poli.ecomp.geav.nhe.view.state.StateTreeView;
 	import br.poli.ecomp.geav.nhe.view.world.WorldView;
 	
-	import flash.display.StageDisplayState;
+	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.net.drm.AddToDeviceGroupSetting;
 	
 	import org.aswing.ASColor;
 	import org.aswing.AsWingConstants;
@@ -18,6 +19,7 @@ package br.poli.ecomp.geav.nhe.view.gui
 	import org.aswing.JTextArea;
 	import org.aswing.JToolBar;
 	import org.aswing.JWindow;
+	
 	import org.aswing.LoadIcon;
 	import org.aswing.SoftBoxLayout;
 	import org.aswing.VectorListModel;
@@ -56,9 +58,11 @@ package br.poli.ecomp.geav.nhe.view.gui
 		
 		private var _pao_user:User;
 		
+		private var pno_area_world:Sprite;
 		
 		public function ProjectView(world_view:WorldView, state_tree:StateTreeView)
 		{
+			
 			getContentPane().setLayout(new SoftBoxLayout(SoftBoxLayout.Y_AXIS,0,SoftBoxLayout.CENTER));
 			
 			_pro_world_view = world_view;
@@ -94,10 +98,17 @@ package br.poli.ecomp.geav.nhe.view.gui
 			lst_participants.setBackground(new ASColor(0xffffff));
 			vct_participants.append("oi");
 			
+			pno_area_world = new Sprite();
+			pno_area_world.graphics.beginFill(0xffffff,0);
+			pno_area_world.graphics.drawRect(0,0,1280,480);
+			pno_area_world.graphics.endFill();
+			pno_area_world.mouseChildren = false;
+			pno_area_world.mouseEnabled = false;
+			
 			pnl_top = new JPanel(new SoftBoxLayout(SoftBoxLayout.X_AXIS, 0, SoftBoxLayout.CENTER));
 			pnl_bottom = new JPanel(new SoftBoxLayout(SoftBoxLayout.X_AXIS, 0, SoftBoxLayout.CENTER));
 			pnl_state_tree = new AssetPane(_pro_state_tree_view);
-			pnl_world_view = new AssetPane(_pro_world_view);
+			pnl_world_view = new AssetPane(pno_area_world);
 			pnl_text = new JPanel(new SoftBoxLayout(SoftBoxLayout.Y_AXIS));
 			
 			pnl_input = new JPanel(new SoftBoxLayout(SoftBoxLayout.X_AXIS));
@@ -109,6 +120,7 @@ package br.poli.ecomp.geav.nhe.view.gui
 			
 			
 			trace(pnl_world_view.width,pnl_world_view.height);
+			this.addChild(pro_world_view);
 			pnl_top.append(pnl_world_view);
 			pnl_top.append(tlb_toolbar);
 			

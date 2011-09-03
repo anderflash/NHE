@@ -62,7 +62,7 @@ package br.poli.ecomp.geav.nhe.view.world
 			{
 				prl_scene_3d.push(new Scene3D());
 				prl_camera_3d.push(new ARAway3DCamera(intrinsic));
-				prl_view_3d.push(new View3D());//prl_scene_3d[i], prl_camera_3d[i]));
+				prl_view_3d.push(new View3D(prl_scene_3d[0]));//prl_scene_3d[i], prl_camera_3d[i]));
 				prl_view_3d[i].width = 640;
 				prl_view_3d[i].height = 480;
 			}
@@ -72,6 +72,7 @@ package br.poli.ecomp.geav.nhe.view.world
 			//view.y = stage.stageHeight/2;
 			webcam = Camera.getCamera();
 			video = new Video(640,480);
+			webcam.setMode(640,480,30);
 			video.attachCamera(webcam);
 			video.scaleX = -1;
 			/*if(webcam)
@@ -198,7 +199,7 @@ package br.poli.ecomp.geav.nhe.view.world
 		
 		public function render_enter_frame(e:Event):void
 		{
-			for(var i:uint = 0; i < _prn_num_views; i++)
+			for(var i:uint = 0; i < _prn_num_views-1; i++)
 			{
 				if(prl_view_3d[i].parent)
 				{
@@ -216,7 +217,7 @@ package br.poli.ecomp.geav.nhe.view.world
 					_bg.perlinNoise(50, 50, 8, 5, true, true, 7, true);
 					
 					var bitmapData:BitmapData = new BitmapData(640,480);
-					prl_view_3d[i].backgroundImage = _bg;
+					prl_view_3d[i].backgroundImage = bitmapData;
 					//BitmapMaterial(prl_planes_3d[i].material).bitmapData = bitmapData;
 					
 					//video.scaleX = -1;
