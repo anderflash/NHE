@@ -46,6 +46,9 @@ package br.poli.ecomp.geav.nhe.view.world
 		
 		private var _prn_num_views:Number = 2;
 		
+		private var bitmapData:BitmapData = new BitmapData(640,480);
+		
+		
 		public function WorldView()
 		{
 			super();
@@ -65,6 +68,7 @@ package br.poli.ecomp.geav.nhe.view.world
 				prl_view_3d.push(new View3D(prl_scene_3d[0]));//prl_scene_3d[i], prl_camera_3d[i]));
 				prl_view_3d[i].width = 640;
 				prl_view_3d[i].height = 480;
+				prl_view_3d[i].backgroundImage = bitmapData;
 			}
 			sprite = new Sprite();
 			ajeitarFundo();
@@ -199,7 +203,7 @@ package br.poli.ecomp.geav.nhe.view.world
 		
 		public function render_enter_frame(e:Event):void
 		{
-			for(var i:uint = 0; i < _prn_num_views-1; i++)
+			for(var i:uint = 0; i < _prn_num_views; i++)
 			{
 				if(prl_view_3d[i].parent)
 				{
@@ -212,12 +216,10 @@ package br.poli.ecomp.geav.nhe.view.world
 					//	bitmapOld = BitmapMaterial(prl_planes_3d[i].material).bitmapData;
 					
 					
-					var _bg:BitmapData;
+					/*var _bg:BitmapData;
 					_bg = new BitmapData(500, 300, false, 0);
-					_bg.perlinNoise(50, 50, 8, 5, true, true, 7, true);
+					_bg.perlinNoise(50, 50, 8, 5, true, true, 7, true);*/
 					
-					var bitmapData:BitmapData = new BitmapData(640,480);
-					prl_view_3d[i].backgroundImage = bitmapData;
 					//BitmapMaterial(prl_planes_3d[i].material).bitmapData = bitmapData;
 					
 					//video.scaleX = -1;
