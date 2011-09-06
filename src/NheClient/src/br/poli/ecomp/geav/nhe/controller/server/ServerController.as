@@ -2,12 +2,16 @@ package br.poli.ecomp.geav.nhe.controller.server
 {
 	import appkit.responders.NResponder;
 	
+	import br.poli.ecomp.geav.nhe.model.db.Database;
+	import br.poli.ecomp.geav.nhe.model.db.pfl.Profile;
 	import br.poli.ecomp.geav.nhe.model.db.pro.Project;
+	import br.poli.ecomp.geav.nhe.model.db.ptc.Participation;
 	import br.poli.ecomp.geav.nhe.model.db.usr.User;
 	import br.poli.ecomp.geav.nhe.model.server.LoginStatus;
 	import br.poli.ecomp.geav.nhe.model.server.ProcedureResponse;
 	import br.poli.ecomp.geav.nhe.model.server.ServerDefaults;
 	import br.poli.ecomp.geav.nhe.model.server.ServerResponse;
+	import br.poli.ecomp.geav.nhe.view.gui.AboutView;
 	
 	import flash.events.AsyncErrorEvent;
 	import flash.events.DataEvent;
@@ -17,7 +21,10 @@ package br.poli.ecomp.geav.nhe.controller.server
 	import flash.events.NetStatusEvent;
 	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
+	import flash.media.Camera;
+	import flash.media.Video;
 	import flash.net.FileReference;
+	import flash.net.GroupSpecifier;
 	import flash.net.NetConnection;
 	import flash.net.NetGroup;
 	import flash.net.NetStream;
@@ -27,6 +34,9 @@ package br.poli.ecomp.geav.nhe.controller.server
 	import flash.net.URLVariables;
 	import flash.net.registerClassAlias;
 	import flash.utils.Dictionary;
+	
+	import marcozero.marzsdk.net.db.IMZTable;
+	import marcozero.marzsdk.net.db.MZOperators;
 
 	public class ServerController
 	{
@@ -59,6 +69,9 @@ package br.poli.ecomp.geav.nhe.controller.server
 		private var _pro_logged_user:User;
 		
 		private var pnl_red5_responders:Dictionary;
+		
+		private var project_participants:Vector.<Participation>;
+		private var project:Project;
 		
 		/*--------------------------------------------
 		 * 				 PUBLIC METHODS
@@ -98,6 +111,7 @@ package br.poli.ecomp.geav.nhe.controller.server
 			pnl_red5_responders[ServerDefaults.FUNCTION_MOVE_BLOCK] 		= new Responder(move_block_responder_result_handler, move_block_responder_status_handler);
 			pnl_red5_responders[ServerDefaults.FUNCTION_CONNECT_BLOCKS] 	= new Responder(connect_blocks_responder_result_handler, connect_blocks_responder_status_handler);
 			pnl_red5_responders[ServerDefaults.FUNCTION_DISCONNECT_BLOCKS] 	= new Responder(disconnect_blocks_responder_result_handler, disconnect_blocks_responder_status_handler);
+			pnl_red5_responders[ServerDefaults.FUNCTION_LIST_PARTICIPANTS] 	= new Responder(list_participants_responder_result_handler, list_participants_responder_status_handler);
 			
 			
 			registerClassAlias("br.poli.ecomp.geav.nhe.model.server.LoginStatus",LoginStatus);
@@ -187,6 +201,7 @@ package br.poli.ecomp.geav.nhe.controller.server
 		 */
 		public function view_project(project:Project):void
 		{
+			this.project = project;
 			pro_red5_connection.call(ServerDefaults.FUNCTION_VIEW_PROJECT, pnl_red5_responders[ServerDefaults.FUNCTION_VIEW_PROJECT],project.pro_identificador);
 		}
 
@@ -339,6 +354,8 @@ package br.poli.ecomp.geav.nhe.controller.server
 						this._pro_logged_user.usr_login = String(login_status.pao_user.get(0,"usr_login"));
 						this._pro_logged_user.usr_password = String(login_status.pao_user.get(0,"usr_password"));
 						this._pro_logged_user.usr_email = String(login_status.pao_user.get(0,"usr_email"));
+						
+						this._pro_logged_user = Database.instance.repositorio(Database.USER_STR).adicionarComCuidado(this._pro_logged_user) as User;
 					}
 				}
 				else
@@ -396,11 +413,63 @@ package br.poli.ecomp.geav.nhe.controller.server
 			
 		}
 		
+		// Resultado da função View Project
+		// Chamar o listar Participantes
 		private function view_project_responder_result_handler(object:*):void
 		{
-			if(Boolean(object))
+			if(object is ProcedureResponse)
 			{
-				NResponder.dispatch(VIEW_PROJECT_SERVER_COMPLETED);
+				if(ProcedureResponse(object).data[0][0] == true)
+					pro_red5_connection.call(ServerDefaults.FUNCTION_LIST_PARTICIPANTS, pnl_red5_responders[ServerDefaults.FUNCTION_LIST_PARTICIPANTS],project.pro_identificador);
+			}
+			else
+			{
+				
+			}
+		}
+		
+		private function view_project_responder_status_handler(object:*):void
+		{
+			
+		}
+
+		// Resposta da função Listar Participantes
+		// Guardar os participantes e Conectar ao Cumulus
+		private function list_participants_responder_result_handler(object:*):void
+		{
+			if(object is Array)
+			{
+				var responseUsr:ProcedureResponse = (object as Array)[0] as ProcedureResponse;
+				var responsePtc:ProcedureResponse = (object as Array)[1] as ProcedureResponse;
+				
+				project_participants = new Vector.<Participation>();
+				
+				for(var i:uint = 0; i < responseUsr.data.length; i++)
+				{
+					var user:User = new User();
+					user.usr_identificador	= responseUsr[i][responseUsr.fields.indexOf("usr_identificador")];
+					user.usr_login			= responseUsr[i][responseUsr.fields.indexOf("usr_login")];
+					user.usr_name			= responseUsr[i][responseUsr.fields.indexOf("usr_name")];
+					user.usr_password		= responseUsr[i][responseUsr.fields.indexOf("usr_password")];
+					user.usr_email			= responseUsr[i][responseUsr.fields.indexOf("usr_email")];
+					
+					user = Database.instance.repositorio(Database.USER_STR).adicionarComCuidado(user) as User;
+					
+					
+					var participation:Participation = new Participation();
+					participation.pfl_identificador = new Profile();
+					participation.pfl_identificador.pfl_identificador = responsePtc[i][responsePtc.fields.indexOf("pfl_identificador")];
+					Database.instance.repositorio(Database.PROFILE_STR).adicionarComCuidado(participation.pfl_identificador);
+					participation.pro_identificador = new Project();
+					participation.pro_identificador.pro_identificador = responsePtc[i][responsePtc.fields.indexOf("pro_identificador")];
+					Database.instance.repositorio(Database.PROJECT_STR).adicionarComCuidado(participation.pro_identificador);
+					
+					participation.ptc_identificador = responsePtc[i][responsePtc.fields.indexOf("ptc_identificador")];
+					participation.usr_identificador = user;
+					Database.instance.repositorio(Database.PARTICIPATION_STR).adicionarComCuidado(participation);
+					project_participants.push(participation);
+				}
+				
 				if(!NResponder.has(NetStatusEvent.NET_STATUS,cumulus_connection_status_event))
 				{
 					NResponder.addNative(pro_cumulus_connection, NetStatusEvent.NET_STATUS, cumulus_connection_status_event);
@@ -411,15 +480,10 @@ package br.poli.ecomp.geav.nhe.controller.server
 				trace("Conectando ao cumulus");
 				pro_cumulus_connection.connect(ServerDefaults.CUMULUS_PROTOCOL + "://" + 
 					this.pas_host + ":" + ServerDefaults.CUMULUS_PORT);
-				
-			}
-			else
-			{
-				
 			}
 		}
 		
-		private function view_project_responder_status_handler(object:*):void
+		private function list_participants_responder_status_handler(object:*):void
 		{
 			
 		}
@@ -490,16 +554,70 @@ package br.poli.ecomp.geav.nhe.controller.server
 			switch(e.info.code)
 			{
 				case "NetConnection.Connect.Success":
+					var groupSpec:GroupSpecifier = new GroupSpecifier("NHE_ROOMS/" + String(project.pro_identificador));
+					groupSpec.serverChannelEnabled = true;
+					groupSpec.postingEnabled = true;
 					
+					pro_send_stream = new NetStream(pro_cumulus_connection, groupSpec.groupspecWithAuthorizations());
+					NResponder.addNative(pro_send_stream, NetStatusEvent.NET_STATUS, cumulus_connection_status_event);
+					pro_receive_stream = new NetStream(pro_cumulus_connection, groupSpec.groupspecWithAuthorizations());
+					NResponder.addNative(pro_receive_stream, NetStatusEvent.NET_STATUS, cumulus_connection_status_event);
+					
+					pro_net_group = new NetGroup(pro_cumulus_connection,groupSpec.groupspecWithAuthorizations());
+					NResponder.addNative(pro_net_group, NetStatusEvent.NET_STATUS, cumulus_connection_status_event);
 					break;
 				case "NetGroup.Connect.Success":
-					
+					if(e.currentTarget == pro_net_group)
+					{
+						
+					}
 					break;
 				case "NetConnection.Connect.Success":
 					
 					break;
 				case "NetConnection.Connect.Success":
 					
+					break;
+				
+				case "NetStream.Connect.Success":
+					if(e.currentTarget == pro_send_stream)
+					{
+						var ptcCriterio:Participation = new Participation();
+						ptcCriterio.usr_identificador = _pro_logged_user;
+						ptcCriterio = Database.instance.repositorio(Database.PARTICIPATION_STR).procurar(ptcCriterio, MZOperators.AND, {usr_identificador: MZOperators.EQUAL}) as Participation;
+						// Se for dono do projeto, posta a webcam
+						if(ptcCriterio.pfl_identificador.pfl_identificador == 2)
+						{
+							pro_send_stream.attachCamera(Camera.getCamera());
+							pro_send_stream.publish("nhe_user_" + String(_pro_logged_user.usr_identificador));
+						}
+					}
+					else if(e.currentTarget == pro_receive_stream)
+					{
+						
+						// Se não for dono, recebe a webcam
+						if(ptcCriterio.pfl_identificador.pfl_identificador != 2)
+						{
+							
+							var participation:Participation = new Participation();
+							participation.pro_identificador = project;
+							var result:Vector.<IMZTable> = Database.instance.repositorio(Database.PARTICIPATION_STR).procurarLista(participation, MZOperators.AND, {pro_identificador:MZOperators.EQUAL});
+							// Procura o dono e recebe a cam dele
+							for(var i:uint =0 ; i < result.length; i++)
+							{
+								if(Participation(result[i]).pfl_identificador.pfl_identificador == 2)
+								{
+									pro_receive_stream.play("nhe_user_" + String(Participation(result[i]).usr_identificador.usr_identificador));
+								}
+							}
+						}
+						
+						NResponder.dispatch(VIEW_PROJECT_SERVER_COMPLETED);
+					}
+					else
+					{
+						
+					}
 					break;
 			}
 		}

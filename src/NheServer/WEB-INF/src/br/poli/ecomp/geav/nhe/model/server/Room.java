@@ -12,6 +12,7 @@ public class Room
 {
 	public List<ConnectedUser> connected_users;
 	public Project current_project;
+	public ConnectedUser owner;
 	
 	public Room()
 	{

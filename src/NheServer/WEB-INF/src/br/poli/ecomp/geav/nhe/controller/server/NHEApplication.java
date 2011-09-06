@@ -171,8 +171,20 @@ public class NHEApplication extends ApplicationAdapter
 		return null;
 	}
 	
-	public Boolean viewProject(int pro_identificador)
+	public ProcedureResponse viewProject(int pro_identificador)
 	{
+		ProcedureResponse falseResponse = new ProcedureResponse();
+		falseResponse.fields.add("success");
+		List<Object> failure = new ArrayList<Object>();
+		failure.add(false);
+		falseResponse.data.add(failure);
+		
+		ProcedureResponse trueResponse = new ProcedureResponse();
+		trueResponse.fields.add("success");
+		List<Object> success = new ArrayList<Object>();
+		success.add(true);
+		trueResponse.data.add(success);
+		
 		// TODO: fazer a entrada da sala
 		IConnection conn = Red5.getConnectionLocal();
 		
@@ -211,21 +223,25 @@ public class NHEApplication extends ApplicationAdapter
 				paramPtc.add(Integer.toString(pro_identificador));
 				ProcedureResponse response = DBConnection.get_connection().run_procedure(Procedures.PTC_SEARCH, paramPtc);
 			
-				// If found room, just add user to the room (only if he is a ,
+				// If found room, just add user to the room (only if he is a viewer,
 				// else create a room and add him (only if he is the owner) 
 				if(indice != -1)
 				{
+					// If has participation, add him
+					// else, send failure (he is forbidden to enter the room)
 					if(response.data.size() > 0 && rooms_opened.get(indice).connected_users.indexOf(user) == -1)
 						rooms_opened.get(indice).connected_users.add(user);
 					else
-						return false;
+						return falseResponse;
 				}
-				else
+				else // Create the room
 				{
+					
 					if(response.data.size() != 0)
 					{
 						int coluna = response.fields.indexOf("pfl_identificador");
 						
+						// Se ele for o dono do projeto
 						if((Integer)response.data.get(0).get(coluna) == 2)
 						{
 							Room newRoom = new Room();
@@ -233,39 +249,97 @@ public class NHEApplication extends ApplicationAdapter
 							newRoom.current_project = new Project();
 							newRoom.current_project.set_pro_identificador(pro_identificador);
 							rooms_opened.add(newRoom);
+							
+							for(int i = 0; i < response.fields.size();i++)
+							{
+								trueResponse.fields.add(response.fields.get(i));
+								trueResponse.data.get(0).add(response.data.get(0).get(i));
+							}
+							
 						}
-						else
-							return false;
+						else // Senão não pode abrir a sala
+							return falseResponse;
 					}
 					else
-						return false;
+						return falseResponse;
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				return false;
+				return falseResponse;
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				return false;
+				return falseResponse;
 			}
 		}
 		else
-			return false;
+			return falseResponse;
+		
+		return trueResponse;
+	}
+	
+	public Boolean exitProject(int pro_identificador)
+	{
 		
 		return true;
 	}
 	
-	public Boolean exitProject()
-	{
-		// TODO: fazer a saída da sala
-		return true;
-	}
 	
-	public Boolean listParticipants()
+	/**
+	 * List Participants of current Project
+	 * @param pro_identificador int the id of the project
+	 * @return a ProcedureResponse with users
+	 * */
+	public ArrayList<ProcedureResponse> listParticipants(int pro_identificador)
 	{
-		// TODO: fazer a remoção do módulo
-		return true;
+		ProcedureResponse response = new ProcedureResponse();
+		response.fields.add("usr_identificador");
+		response.fields.add("usr_name");
+		response.fields.add("usr_login");
+		response.fields.add("usr_password");
+		response.fields.add("usr_email");
+		
+		ArrayList<ProcedureResponse> retorno = new ArrayList<ProcedureResponse>();
+		for(int i = 0; i < rooms_opened.size(); i++)
+		{
+			if(rooms_opened.get(i).current_project.get_pro_identificador() == pro_identificador)
+			{
+				try {
+					DBConnection.get_connection().begin();
+					ProcedureResponse responseDBTotal = new ProcedureResponse();
+					retorno.add(response);
+					retorno.add(responseDBTotal);
+					for(int j = 0; j < rooms_opened.get(i).connected_users.size(); j++)
+					{
+						User usuario = rooms_opened.get(i).connected_users.get(j).user;
+						List<Object> linha = new ArrayList<Object>();
+						linha.add(usuario.get_usr_identificador());
+						linha.add(usuario.get_usr_nome());
+						linha.add(usuario.get_usr_login());
+						linha.add(usuario.get_usr_senha());
+						linha.add(usuario.get_usr_email());
+						response.data.add(linha);
+						
+						Vector<String> paramPtc = new Vector<String>();
+						paramPtc.add(Integer.toString(usuario.get_usr_identificador()));
+						paramPtc.add(Integer.toString(pro_identificador));
+						ProcedureResponse responseDB = DBConnection.get_connection().run_procedure(Procedures.PTC_SEARCH, paramPtc);
+						
+						responseDBTotal.data.add(responseDB.data.get(0));
+						if(j == 0) responseDBTotal.fields = responseDB.fields;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
+		return retorno;
 	}
 	
 	public Boolean changeUserName()
